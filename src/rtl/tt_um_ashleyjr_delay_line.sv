@@ -32,7 +32,7 @@ module tt_um_ashleyjr_delay_line(
       .i_clk      (clk        ),
       .i_rst      (rst        ),
       .i_data     (data       ),
-      .o_tx       (uo_out[0]  ).
+      .o_tx       (uo_out[0]  ),
       .i_valid    (valid      ),
       .o_accept   ()
    ); 
