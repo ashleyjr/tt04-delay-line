@@ -15,20 +15,26 @@ module x_uart_rx#(
   
    localparam logic [p_timer_width-1:0] p_timer_top_w  = p_timer_top[p_timer_width-1:0];
    localparam logic [p_timer_width-1:0] p_timer_half_w = p_timer_half[p_timer_width-1:0];
-   
-   typedef enum logic [3:0] {
-      IDLE, START, 
-      A0, A1, A2, A3, A4, A5, A6, A7
-   } sm_uart_t;
+    
+   localparam logic [3:0] IDLE   = 4'h0; 
+   localparam logic [3:0] START  = 4'h1; 
+   localparam logic [3:0] A0     = 4'h2; 
+   localparam logic [3:0] A1     = 4'h3; 
+   localparam logic [3:0] A2     = 4'h4; 
+   localparam logic [3:0] A3     = 4'h5; 
+   localparam logic [3:0] A4     = 4'h6; 
+   localparam logic [3:0] A5     = 4'h7; 
+   localparam logic [3:0] A6     = 4'h8; 
+   localparam logic [3:0] A7     = 4'h9; 
  
    logic                      p0_rx;
    logic                      p1_rx;
  
    logic                      rx_fall;
 
-   sm_uart_t                  sm_uart_q;
-   sm_uart_t                  sm_uart_d;  
-   sm_uart_t                  sm_uart_inc;  
+   logic                      sm_uart_q;
+   logic                      sm_uart_d;  
+   logic                      sm_uart_inc;  
    logic                      sm_uart_en;
    logic                      sm_uart_idle;
    logic                      sm_uart_start;
