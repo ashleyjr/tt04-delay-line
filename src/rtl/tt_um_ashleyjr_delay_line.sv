@@ -12,6 +12,12 @@ module tt_um_ashleyjr_delay_line(
    logic       valid;
    logic       rst;
 
+   // Tie off unused outputs
+   assign uo_out[7:1] = 7'h00;
+   assign uio_out     = 8'h00;
+   assign uio_oe      = 8'h00;
+
+   // Reverse reset
    assign rst = rst_n;
 
    x_uart_rx #(
