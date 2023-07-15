@@ -53,7 +53,7 @@ module x_uart_rx#(
   
    assign p0_rx = i_rx;
 
-   always_ff@(posedge i_clk or posedge i_rst) begin
+   always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)   p1_rx <= 'd1;
       else        p1_rx <= p0_rx;
    end 
@@ -72,7 +72,7 @@ module x_uart_rx#(
    assign timer_en   =  ~sm_uart_idle |  
                        ((sm_uart_idle) & rx_fall);
 
-   always_ff@(posedge i_clk or posedge i_rst) begin
+   always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)         timer_q <= 'd0;
       else if(timer_en) timer_q <= timer_d;
    end
@@ -88,7 +88,7 @@ module x_uart_rx#(
                           (sm_uart_start) ? timer_half:
                                             timer_top; 
 
-   always_ff@(posedge i_clk or posedge i_rst) begin
+   always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)            sm_uart_q <= IDLE;
       else if(sm_uart_en)  sm_uart_q <= sm_uart_d;
    end
@@ -98,7 +98,7 @@ module x_uart_rx#(
 
    assign valid_d = (sm_uart_q == A7) & timer_top; 
 
-   always_ff@(posedge i_clk or posedge i_rst) begin
+   always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)   valid_q <= 'd0;
       else        valid_q <= valid_d;
    end
@@ -113,7 +113,7 @@ module x_uart_rx#(
                         (sm_uart_q == START)) & 
                       sm_uart_en;
    
-   always_ff@(posedge i_clk or posedge i_rst) begin
+   always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)         data_q <= 'd0;
       else if(data_en)  data_q <= data_d;
    end

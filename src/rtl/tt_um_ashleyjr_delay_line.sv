@@ -28,7 +28,7 @@ module tt_um_ashleyjr_delay_line(
    x_uart_tx #(
       .p_clk_hz   (50000000   ),
       .p_baud     (115200     )
-   ) u_rx(
+   ) u_tx(
       .i_clk      (clk        ),
       .i_rst      (rst        ),
       .i_data     (data       ),
