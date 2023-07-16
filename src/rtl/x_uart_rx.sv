@@ -32,9 +32,9 @@ module x_uart_rx#(
  
    logic                      rx_fall;
 
-   logic                      sm_uart_q;
-   logic                      sm_uart_d;  
-   logic                      sm_uart_inc;  
+   logic [3:0]                sm_uart_q;
+   logic [3:0]                sm_uart_d;  
+   logic [3:0]                sm_uart_inc;  
    logic                      sm_uart_en;
    logic                      sm_uart_idle;
    logic                      sm_uart_start;
