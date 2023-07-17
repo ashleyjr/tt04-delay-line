@@ -7,7 +7,9 @@ module x_driver(
    // Tx
    output   logic          o_valid,
    input    logic          i_accept,
-   output   logic [7:0]    o_data
+   output   logic [7:0]    o_data,
+   // Delay line
+   input    logic [31:0]   i_dl
 );
    logic [31:0]   data_d;
    logic [31:0]   data_q;  
@@ -21,15 +23,18 @@ module x_driver(
 
    logic          load_en;
    logic          unload_en;
+   logic          dl_en;
 
    // Data
    assign data_in = {data_q[27:0],i_data[7:4]};
 
    assign data_out = {data_q[23:0], 8'h00};
 
-   assign data_d = (load_en) ? data_in : data_out; 
+   assign data_d = (load_en) ? data_in : 
+                   (dl_en  ) ? i_dl :
+                               data_out; 
   
-   assign data_en = load_en | i_accept;
+   assign data_en = load_en | dl_en | i_accept;
 
    always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)         data_q <= 'd0;
@@ -49,6 +54,7 @@ module x_driver(
    // Decode 
    assign load_en   = (i_data[3:0] == 4'h0) & i_valid;
    assign unload_en = (i_data[3:0] == 4'h1) & i_valid;
+   assign dl_en     = (i_data[3:0] == 4'h2) & i_valid;
    
    // Drive Valid
    assign o_valid = valid_q;  

@@ -8,14 +8,15 @@ module tt_um_ashleyjr_delay_line(
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-   logic [7:0] rx_data;
-   logic       rx_valid;
+   logic [7:0]    rx_data;
+   logic          rx_valid;
     
-   logic [7:0] tx_data;
-   logic       tx_valid;
-   logic       tx_accept; 
+   logic [7:0]    tx_data;
+   logic          tx_valid;
+   logic          tx_accept; 
 
-   logic       rst;
+   logic [31:0]   dl;
+   logic          rst;
 
    // Tie off unused outputs
    assign uo_out[7:1] = 7'h00;
@@ -48,8 +49,7 @@ module tt_um_ashleyjr_delay_line(
       .i_valid    (tx_valid   ),
       .o_accept   (tx_accept  )
    ); 
-
-   // Driver
+ 
    x_driver u_driver(
       .i_clk      (clk        ),
       .i_rst      (rst        ),
@@ -59,7 +59,15 @@ module tt_um_ashleyjr_delay_line(
       // Tx
       .o_valid    (tx_valid   ),
       .i_accept   (tx_accept  ),
-      .o_data     (tx_data    )
+      .o_data     (tx_data    ),
+      // Delay line
+      .i_dl       (dl         )
+   );
+ 
+   x_delay_line u_delay_line(
+      .i_clk      (clk        ),
+      .i_rst      (rst        ),
+      .o_data     (dl         )
    );
 
 endmodule
