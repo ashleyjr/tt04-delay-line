@@ -16,7 +16,7 @@ module x_delay_line(
       else        start_q <= start_d;
    end 
    
-   assign dl[0]  = i_clk;
+   assign dl[0]  = start_q;
    assign dl[1]  = ~dl[0];
    assign dl[2]  = ~dl[1];
    assign dl[3]  = ~dl[2];
