@@ -15,9 +15,11 @@ module x_delay_line(
       if(i_rst)   start_q <= 'd1;
       else        start_q <= start_d;
    end 
+  
+   assign dl[0] = start_q;
    
-   assign dl[0]  = start_q;
-   assign dl[1]  = ~dl[0];
+  (* keep = "true" *) sky130_fd_sc_hd__inv_1 inv0 (   .A(dl[0]),  .Y(dl[1]));
+   
    assign dl[2]  = ~dl[1];
    assign dl[3]  = ~dl[2];
    assign dl[4]  = ~dl[3];
