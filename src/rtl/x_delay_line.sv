@@ -3,9 +3,18 @@ module x_delay_line(
    input    logic          i_rst, 
    output   logic [31:0]   o_data
 );
+   logic          start_q;
+   logic          start_d;
    logic [31:0]   dl;
    logic [31:0]   p0_data;
    logic [31:0]   p1_data;  
+   
+   assign start_d = ~start_q;
+
+   always@(posedge i_clk or posedge i_rst) begin
+      if(i_rst)   start_q <= 'd1;
+      else        start_q <= start_d;
+   end 
    
    assign dl[0]  = i_clk;
    assign dl[1]  = ~dl[0];
