@@ -11,6 +11,7 @@ project:
     - rtl/x_uart_tx.sv
     - rtl/x_driver.sv
     - rtl/x_delay_line.sv
+    - $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
   top_module:  "tt_um_ashleyjr_delay_line"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
