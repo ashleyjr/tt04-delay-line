@@ -1,6 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ps
-
+`define SIMULATION
 module tb ();
 
    initial begin
