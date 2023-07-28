@@ -80,33 +80,33 @@ async def deadbeef(dut):
 
     assert d == 0xDEADBEEF
 
-#@cocotb.test()
-#async def capture(dut):
-#    dut._log.info("start")
-#
-#    # Setup 50MHz clock
-#    clock = Clock(dut.clk, 20, units="ns")
-#    cocotb.start_soon(clock.start())
-#
-#    # Reset design (active low)
-#    dut.rst_n.value = 0
-#    await ClockCycles(dut.clk, 10)
-#    dut.rst_n.value = 1
-#
-#    await ClockCycles(dut.clk, 10)
-#
-#    # Design has been selected
-#    dut.ena.value = 1
-#
-#    # UART is idle
-#    dut.ui_in.value = 0x01
-#    await ClockCycles(dut.clk, 100)
-#
-#    # Capture delay line
-#    await dl(dut)
-#
-#    # Unload
-#    d = await unload_data(dut)
-#
-#    assert d == 0xAAAAAAAB
+@cocotb.test()
+async def capture(dut):
+    dut._log.info("start")
+
+    # Setup 50MHz clock
+    clock = Clock(dut.clk, 20, units="ns")
+    cocotb.start_soon(clock.start())
+
+    # Reset design (active low)
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+
+    await ClockCycles(dut.clk, 10)
+
+    # Design has been selected
+    dut.ena.value = 1
+
+    # UART is idle
+    dut.ui_in.value = 0x01
+    await ClockCycles(dut.clk, 100)
+
+    # Capture delay line
+    await dl(dut)
+
+    # Unload
+    d = await unload_data(dut)
+
+    assert d == 0xAAAAAAAA
 

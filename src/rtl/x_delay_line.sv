@@ -1,19 +1,29 @@
 module x_delay_line(
    input    logic          i_clk,
    input    logic          i_rst, 
+   input    logic          i_start,
    output   logic [31:0]   o_data
 );
+   (* keep = "true" *) logic          first_q;  
    (* keep = "true" *) logic          start_q;
    (* keep = "true" *) logic          start_d;
+   (* keep = "true" *) logic          start_en;
    (* keep = "true" *) logic [31:0]   dl;
    (* keep = "true" *) logic [31:0]   p0_data;
-   (* keep = "true" *) logic [31:0]   p1_data;  
+   (* keep = "true" *) logic [31:0]   p1_data;   
+
+   always@(posedge i_clk or posedge i_rst) begin
+      if(i_rst)   first_q <= 'd1;
+      else        first_q <= 'd0;
+   end  
    
+   assign start_en = i_start | first_q | start_q;
+
    assign start_d = ~start_q;
 
    always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   start_q <= 'd1;
-      else        start_q <= start_d;
+      if(i_rst)         start_q <= 'd0;
+      else if(start_en) start_q <= start_d;
    end 
   
    assign dl[0] = start_q;

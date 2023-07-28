@@ -5,7 +5,7 @@ module x_delay_line_cell(
 
 `ifdef SIMULATION
 
-   assign #50 o_y = ~i_a;
+   assign #17 o_y = ~i_a;
 
 `else
 

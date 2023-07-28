@@ -9,6 +9,7 @@ module x_driver(
    input    logic          i_accept,
    output   logic [7:0]    o_data,
    // Delay line
+   output   logic          o_start,
    input    logic [31:0]   i_dl
 );
    logic [31:0]   data_d;
@@ -61,5 +62,8 @@ module x_driver(
 
    // Drive write data
    assign o_data = data_q[31:24];
-  
+
+   // Start
+   assign o_start = dl_en;
+
 endmodule
