@@ -68,12 +68,12 @@ R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
 
-.tran 500p 200n
+.tran 100p 50n
 
 .control
    run
    plot v(clk) v(rst_n) v(ena) v(x0.u_delay_line.first_q)
-   plot v(x0.u_delay_line.dl\\[0\\])  v(x0.u_delay_line.dl\\[8\\]) v(x0.u_delay_line.dl\\[16\\]) v(x0.u_delay_line.dl\\24\\])   
+   plot v(x0.u_delay_line.dl_0)  v(x0.u_delay_line.dl_8) v(x0.u_delay_line.dl_16) v(x0.u_delay_line.dl_24)  v(x0.u_delay_line.dl_31) 
 .endc
 
 .end
