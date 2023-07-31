@@ -3,6 +3,15 @@
 
 - Seeing ~2ns to cross the entire delay lines, too short...
 
-![](20230732_rise.png)
+![](rise.png)
 
-![](20230732_fall.png)
+![](fall.png)
+
+
+- With the parasitic extraction this increases to ~3.5ns 
+
+- The simulation take x10 longer to run with parasticis extraction
+
+![](parasitics_rise.png)
+
+![](parasitics_fall.png)

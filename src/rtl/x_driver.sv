@@ -22,6 +22,11 @@ module x_driver(
    logic          valid_d;
    logic          valid_q;
 
+   logic          p0_capture;
+   logic          p1_capture;
+   logic          p2_capture;
+   logic          p3_capture;
+   
    logic          load_en;
    logic          unload_en;
    logic          dl_en;
@@ -31,11 +36,11 @@ module x_driver(
 
    assign data_out = {data_q[23:0], 8'h00};
 
-   assign data_d = (load_en) ? data_in : 
-                   (dl_en  ) ? i_dl :
-                               data_out; 
+   assign data_d = (load_en     ) ? data_in : 
+                   (p3_capture  ) ? i_dl :
+                                    data_out; 
   
-   assign data_en = load_en | dl_en | i_accept;
+   assign data_en = load_en | p3_capture | i_accept;
 
    always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)         data_q <= 'd0;
@@ -51,7 +56,25 @@ module x_driver(
       if(i_rst)            valid_q <= 'd0;
       else if(valid_en)    valid_q <= valid_d;
    end   
-   
+  
+   // Delay for the capture
+   assign p0_capture = dl_en;
+
+   always@(posedge i_clk or posedge i_rst) begin
+      if(i_rst)   p1_capture <= 'd0;
+      else        p1_capture <= p0_capture;
+   end  
+
+   always@(posedge i_clk or posedge i_rst) begin
+      if(i_rst)   p2_capture <= 'd0;
+      else        p2_capture <= p1_capture;
+   end  
+
+   always@(posedge i_clk or posedge i_rst) begin
+      if(i_rst)   p3_capture <= 'd0;
+      else        p3_capture <= p2_capture;
+   end  
+
    // Decode 
    assign load_en   = (i_data[3:0] == 4'h0) & i_valid;
    assign unload_en = (i_data[3:0] == 4'h1) & i_valid;
