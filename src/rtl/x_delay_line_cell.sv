@@ -12,7 +12,7 @@ module x_delay_line_cell(
 
    (* keep = "true" *) sky130_fd_sc_hd__dlygate4sd3_1 u_inv_a(
       .A(i_a),  
-      .Y(o_y)
+      .X(o_y)
    );
 
 `endif
