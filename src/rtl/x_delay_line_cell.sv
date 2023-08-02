@@ -61,14 +61,14 @@ module x_delay_line_cell(
    (* keep = "true" *) sky130_fd_sc_hd__sdfrtp_1 u_ff_0 (       
       .CLK     (i_clk   ),
       .D       (o_dl    ),
-      .RESET_B (i_rst   )
+      .RESET_B (i_rst   ),
       .Q       (q       ),
    );
 
    (* keep = "true" *) sky130_fd_sc_hd__sdfrtp_1 u_ff_1 (       
       .CLK     (i_clk   ),
       .D       (q       ),
-      .RESET_B (i_rst   )
+      .RESET_B (i_rst   ),
       .Q       (o_data  ),
    );
 
