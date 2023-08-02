@@ -40,9 +40,39 @@ module x_delay_line(
    (* keep = "true" *) logic           dl_29;
    (* keep = "true" *) logic           dl_30;
    (* keep = "true" *) logic           dl_31;
-   (* keep = "true" *) logic [31:0]    p0_data;
-   (* keep = "true" *) logic [31:0]    p1_data;   
-   (* keep = "true" *) logic [31:0]    p2_data;   
+   (* keep = "true" *) logic           dl_32;
+   (* keep = "true" *) logic           data_0; 
+   (* keep = "true" *) logic           data_1;
+   (* keep = "true" *) logic           data_2; 
+   (* keep = "true" *) logic           data_3; 
+   (* keep = "true" *) logic           data_4; 
+   (* keep = "true" *) logic           data_5; 
+   (* keep = "true" *) logic           data_6; 
+   (* keep = "true" *) logic           data_7; 
+   (* keep = "true" *) logic           data_8; 
+   (* keep = "true" *) logic           data_9;
+   (* keep = "true" *) logic           data_10; 
+   (* keep = "true" *) logic           data_11;
+   (* keep = "true" *) logic           data_12;
+   (* keep = "true" *) logic           data_13;
+   (* keep = "true" *) logic           data_14;
+   (* keep = "true" *) logic           data_15;
+   (* keep = "true" *) logic           data_16;
+   (* keep = "true" *) logic           data_17;
+   (* keep = "true" *) logic           data_18;
+   (* keep = "true" *) logic           data_19;
+   (* keep = "true" *) logic           data_20;
+   (* keep = "true" *) logic           data_21;
+   (* keep = "true" *) logic           data_22;
+   (* keep = "true" *) logic           data_23;
+   (* keep = "true" *) logic           data_24;
+   (* keep = "true" *) logic           data_25;
+   (* keep = "true" *) logic           data_26;
+   (* keep = "true" *) logic           data_27;
+   (* keep = "true" *) logic           data_28;
+   (* keep = "true" *) logic           data_29;
+   (* keep = "true" *) logic           data_30;
+   (* keep = "true" *) logic           data_31;
 
    always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)   first_q <= 'd1;
@@ -60,83 +90,70 @@ module x_delay_line(
   
    assign dl_0 = start_q;
    
-   (* keep = "true" *) x_delay_line_cell u_dl_0    (.i_a(dl_0 ),  .o_y(dl_1   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_1    (.i_a(dl_1 ),  .o_y(dl_2   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_2    (.i_a(dl_2 ),  .o_y(dl_3   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_3    (.i_a(dl_3 ),  .o_y(dl_4   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_4    (.i_a(dl_4 ),  .o_y(dl_5   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_5    (.i_a(dl_5 ),  .o_y(dl_6   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_6    (.i_a(dl_6 ),  .o_y(dl_7   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_7    (.i_a(dl_7 ),  .o_y(dl_8   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_8    (.i_a(dl_8 ),  .o_y(dl_9   ));
-   (* keep = "true" *) x_delay_line_cell u_dl_9    (.i_a(dl_9 ),  .o_y(dl_10  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_10   (.i_a(dl_10),  .o_y(dl_11  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_11   (.i_a(dl_11),  .o_y(dl_12  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_12   (.i_a(dl_12),  .o_y(dl_13  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_13   (.i_a(dl_13),  .o_y(dl_14  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_14   (.i_a(dl_14),  .o_y(dl_15  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_15   (.i_a(dl_15),  .o_y(dl_16  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_16   (.i_a(dl_16),  .o_y(dl_17  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_17   (.i_a(dl_17),  .o_y(dl_18  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_18   (.i_a(dl_18),  .o_y(dl_19  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_19   (.i_a(dl_19),  .o_y(dl_20  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_20   (.i_a(dl_20),  .o_y(dl_21  )); 
-   (* keep = "true" *) x_delay_line_cell u_dl_21   (.i_a(dl_21),  .o_y(dl_22  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_22   (.i_a(dl_22),  .o_y(dl_23  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_23   (.i_a(dl_23),  .o_y(dl_24  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_24   (.i_a(dl_24),  .o_y(dl_25  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_25   (.i_a(dl_25),  .o_y(dl_26  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_26   (.i_a(dl_26),  .o_y(dl_27  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_27   (.i_a(dl_27),  .o_y(dl_28  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_28   (.i_a(dl_28),  .o_y(dl_29  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_29   (.i_a(dl_29),  .o_y(dl_30  ));
-   (* keep = "true" *) x_delay_line_cell u_dl_30   (.i_a(dl_30),  .o_y(dl_31  ));
-
-   // Resync output
+   (* keep = "true" *) x_delay_line_cell u_dl_0    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_0 ),.o_dl(dl_1 ),.o_data(data_0 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_1    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_1 ),.o_dl(dl_2 ),.o_data(data_1 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_2    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_2 ),.o_dl(dl_3 ),.o_data(data_2 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_3    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_3 ),.o_dl(dl_4 ),.o_data(data_3 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_4    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_4 ),.o_dl(dl_5 ),.o_data(data_4 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_5    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_5 ),.o_dl(dl_6 ),.o_data(data_5 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_6    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_6 ),.o_dl(dl_7 ),.o_data(data_6 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_7    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_7 ),.o_dl(dl_8 ),.o_data(data_7 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_8    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_8 ),.o_dl(dl_9 ),.o_data(data_8 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_9    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_9 ),.o_dl(dl_10),.o_data(data_9 ));
+   (* keep = "true" *) x_delay_line_cell u_dl_10   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_10),.o_dl(dl_11),.o_data(data_10));
+   (* keep = "true" *) x_delay_line_cell u_dl_11   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_11),.o_dl(dl_12),.o_data(data_11));
+   (* keep = "true" *) x_delay_line_cell u_dl_12   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_12),.o_dl(dl_13),.o_data(data_12));
+   (* keep = "true" *) x_delay_line_cell u_dl_13   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_13),.o_dl(dl_14),.o_data(data_13));
+   (* keep = "true" *) x_delay_line_cell u_dl_14   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_14),.o_dl(dl_15),.o_data(data_14));
+   (* keep = "true" *) x_delay_line_cell u_dl_15   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_15),.o_dl(dl_16),.o_data(data_15));
+   (* keep = "true" *) x_delay_line_cell u_dl_16   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_16),.o_dl(dl_17),.o_data(data_16));
+   (* keep = "true" *) x_delay_line_cell u_dl_17   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_17),.o_dl(dl_18),.o_data(data_17));
+   (* keep = "true" *) x_delay_line_cell u_dl_18   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_18),.o_dl(dl_19),.o_data(data_18));
+   (* keep = "true" *) x_delay_line_cell u_dl_19   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_19),.o_dl(dl_20),.o_data(data_19));
+   (* keep = "true" *) x_delay_line_cell u_dl_20   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_20),.o_dl(dl_21),.o_data(data_20)); 
+   (* keep = "true" *) x_delay_line_cell u_dl_21   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_21),.o_dl(dl_22),.o_data(data_21));
+   (* keep = "true" *) x_delay_line_cell u_dl_22   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_22),.o_dl(dl_23),.o_data(data_22));
+   (* keep = "true" *) x_delay_line_cell u_dl_23   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_23),.o_dl(dl_24),.o_data(data_23));
+   (* keep = "true" *) x_delay_line_cell u_dl_24   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_24),.o_dl(dl_25),.o_data(data_24));
+   (* keep = "true" *) x_delay_line_cell u_dl_25   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_25),.o_dl(dl_26),.o_data(data_25));
+   (* keep = "true" *) x_delay_line_cell u_dl_26   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_26),.o_dl(dl_27),.o_data(data_26));
+   (* keep = "true" *) x_delay_line_cell u_dl_27   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_27),.o_dl(dl_28),.o_data(data_27));
+   (* keep = "true" *) x_delay_line_cell u_dl_28   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_28),.o_dl(dl_29),.o_data(data_28));
+   (* keep = "true" *) x_delay_line_cell u_dl_29   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_29),.o_dl(dl_30),.o_data(data_29));
+   (* keep = "true" *) x_delay_line_cell u_dl_30   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_30),.o_dl(dl_31),.o_data(data_30));
+   (* keep = "true" *) x_delay_line_cell u_dl_31   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_31),.o_dl(dl_32),.o_data(data_31));
+   (* keep = "true" *) x_delay_line_cell u_dl_32   (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_32),.o_dl(),     .o_data());    
    
-   assign p0_data = {dl_31, 
-                     dl_30,
-                     dl_29, 
-                     dl_28, 
-                     dl_27, 
-                     dl_26, 
-                     dl_25, 
-                     dl_24, 
-                     dl_23, 
-                     dl_22, 
-                     dl_21,  
-                     dl_20,
-                     dl_19,
-                     dl_18,
-                     dl_17,
-                     dl_16,
-                     dl_15,
-                     dl_14,
-                     dl_13,
-                     dl_12,
-                     dl_11,
-                     dl_10,
-                     dl_9,
-                     dl_8,
-                     dl_7,
-                     dl_6,
-                     dl_5,
-                     dl_4,
-                     dl_3,
-                     dl_2,
-                     dl_1,
-                     dl_0};
-
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   p1_data <= 'd0;
-      else        p1_data <= p0_data;
-   end   
-   
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   p2_data <= 'd0;
-      else        p2_data <= p1_data;
-   end   
-    
-   assign o_data = p2_data;
-  
+   assign o_data = { data_31, 
+                     data_30,
+                     data_29, 
+                     data_28, 
+                     data_27, 
+                     data_26, 
+                     data_25, 
+                     data_24, 
+                     data_23, 
+                     data_22, 
+                     data_21,  
+                     data_20,
+                     data_19,
+                     data_18,
+                     data_17,
+                     data_16,
+                     data_15,
+                     data_14,
+                     data_13,
+                     data_12,
+                     data_11,
+                     data_10,
+                     data_9,
+                     data_8,
+                     data_7,
+                     data_6,
+                     data_5,
+                     data_4,
+                     data_3,
+                     data_2,
+                     data_1,
+                     data_0}; 
 endmodule
