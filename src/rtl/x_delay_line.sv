@@ -8,6 +8,21 @@ module x_delay_line(
    (* keep = "true" *) logic           start_q;
    (* keep = "true" *) logic           start_d;
    (* keep = "true" *) logic           start_en;
+   (* keep = "true" *) logic           bulk_0; 
+   (* keep = "true" *) logic           bulk_1;
+   (* keep = "true" *) logic           bulk_2; 
+   (* keep = "true" *) logic           bulk_3; 
+   (* keep = "true" *) logic           bulk_4; 
+   (* keep = "true" *) logic           bulk_5; 
+   (* keep = "true" *) logic           bulk_6; 
+   (* keep = "true" *) logic           bulk_7; 
+   (* keep = "true" *) logic           bulk_8; 
+   (* keep = "true" *) logic           bulk_9;
+   (* keep = "true" *) logic           bulk_10; 
+   (* keep = "true" *) logic           bulk_11;
+   (* keep = "true" *) logic           bulk_12;
+   (* keep = "true" *) logic           bulk_13;
+   (* keep = "true" *) logic           bulk_14;
    (* keep = "true" *) logic           dl_0; 
    (* keep = "true" *) logic           dl_1;
    (* keep = "true" *) logic           dl_2; 
@@ -87,9 +102,24 @@ module x_delay_line(
       if(i_rst)         start_q <= 'd0;
       else if(start_en) start_q <= start_d;
    end 
-  
-   assign dl_0 = start_q;
    
+   (* keep = "true" *) x_delay_line_bulk u_bulk_0  (.i_dl(start_q ),.o_dl(bulk_0 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_1  (.i_dl(bulk_0  ),.o_dl(bulk_1 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_2  (.i_dl(bulk_1  ),.o_dl(bulk_2 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_3  (.i_dl(bulk_2  ),.o_dl(bulk_3 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_4  (.i_dl(bulk_3  ),.o_dl(bulk_4 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_5  (.i_dl(bulk_4  ),.o_dl(bulk_5 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_6  (.i_dl(bulk_5  ),.o_dl(bulk_6 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_7  (.i_dl(bulk_6  ),.o_dl(bulk_7 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_8  (.i_dl(bulk_7  ),.o_dl(bulk_8 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_9  (.i_dl(bulk_8  ),.o_dl(bulk_9 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_10 (.i_dl(bulk_9  ),.o_dl(bulk_10 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_11 (.i_dl(bulk_10 ),.o_dl(bulk_11 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_12 (.i_dl(bulk_11 ),.o_dl(bulk_12 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_13 (.i_dl(bulk_12 ),.o_dl(bulk_13 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_14 (.i_dl(bulk_13 ),.o_dl(bulk_14 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_15 (.i_dl(bulk_14 ),.o_dl(dl_0));
+
    (* keep = "true" *) x_delay_line_cell u_dl_0    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_0 ),.o_dl(dl_1 ),.o_data(data_0 ));
    (* keep = "true" *) x_delay_line_cell u_dl_1    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_1 ),.o_dl(dl_2 ),.o_data(data_1 ));
    (* keep = "true" *) x_delay_line_cell u_dl_2    (.i_clk(i_clk),.i_rst(i_rst),.i_dl(dl_2 ),.o_dl(dl_3 ),.o_data(data_2 ));

@@ -8,6 +8,8 @@ VERILOG_SOURCES += $(PWD)/../rtl/x_uart_tx.sv
 VERILOG_SOURCES += $(PWD)/../rtl/x_driver.sv
 VERILOG_SOURCES += $(PWD)/../rtl/x_delay_line.sv
 VERILOG_SOURCES += $(PWD)/../rtl/x_delay_line_cell.sv
+VERILOG_SOURCES += $(PWD)/../rtl/x_delay_line_bulk.sv
+
 
 TOPLEVEL = tb
 

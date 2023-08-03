@@ -108,5 +108,5 @@ async def capture(dut):
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0x000FFFFF
+    assert d == 0x0000000F
 
