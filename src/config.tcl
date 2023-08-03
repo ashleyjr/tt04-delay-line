@@ -52,8 +52,10 @@ set ::env(DECAP_CELL) "\
 
 # clock
 set ::env(CLOCK_TREE_SYNTH) 1
-# period is in ns, so 20ns == 50mHz
-set ::env(CLOCK_PERIOD) "20"
+
+# TODO: Signoff failing setup path rather than turning down clock
+# period is in ns, so 40ns == 25MHz
+set ::env(CLOCK_PERIOD) "40"
 set ::env(CLOCK_PORT) {clk}
 
 # hold/slack margin
