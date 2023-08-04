@@ -56,21 +56,19 @@ module x_delay_line_cell(
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_C (  .A(dl_B),  .Y(dl_C));
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_D (  .A(dl_C),  .Y(dl_D));
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_E (  .A(dl_D),  .Y(dl_E));
-   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_F (  .A(dl_E),  .Y(o_dl));
-
-   // TODO: Un invert reset
+   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_F (  .A(dl_E),  .Y(o_dl));  
    
-   (* keep = "true" *) sky130_fd_sc_hd__sdfrtp_1 u_ff_0 (       
+   (* keep = "true" *) sky130_fd_sc_hd__dfrtp_1 u_ff_0 (       
       .CLK     (i_clk   ),
       .D       (o_dl    ),
-      .RESET_B (~i_rst   ),
+      .RESET_B (i_rst   ),
       .Q       (q       ),
    );
 
-   (* keep = "true" *) sky130_fd_sc_hd__sdfrtp_1 u_ff_1 (       
+   (* keep = "true" *) sky130_fd_sc_hd__dfrtp_1 u_ff_1 (       
       .CLK     (i_clk   ),
       .D       (q       ),
-      .RESET_B (~i_rst   ),
+      .RESET_B (i_rst   ),
       .Q       (o_data  ),
    );
 
