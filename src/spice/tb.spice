@@ -1,6 +1,7 @@
 Simulation: tt_um_ashleyjr_delay_line
 
 .lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' tt
+
 .include "tt_um_ashleyjr_delay_line.spice"
 
 X0 VGND VPWR clk ena rst_n
@@ -68,7 +69,7 @@ R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
 
-.tran 100p 50n
+.tran 100p 100n
 
 .control
    run
