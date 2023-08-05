@@ -1,0 +1,97 @@
+Simulation: 001_inv_prop_delay 
+
+
+.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' tt
+
+.include "/home/ashleyjr/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice"
+
+
+
+
+* sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_a clk      VGND VGND VPWR VPWR inv_1_1  sky130_fd_sc_hd__inv_1 
+Xsky130_fd_sc_hd__inv_1_b inv_1_1  VGND VGND VPWR VPWR inv_1_2  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_c inv_1_2  VGND VGND VPWR VPWR inv_1_3  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_d inv_1_3  VGND VGND VPWR VPWR inv_1_4  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_e inv_1_4  VGND VGND VPWR VPWR inv_1_5  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_f inv_1_5  VGND VGND VPWR VPWR inv_1_6  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_g inv_1_6  VGND VGND VPWR VPWR inv_1_7  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_h inv_1_7  VGND VGND VPWR VPWR inv_1_8  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_i inv_1_8  VGND VGND VPWR VPWR inv_1_9  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_j inv_1_9  VGND VGND VPWR VPWR inv_1_10 sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_k inv_1_10 VGND VGND VPWR VPWR inv_1_11 sky130_fd_sc_hd__inv_1
+
+
+* sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_a clk      VGND VGND VPWR VPWR inv_2_1  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_b inv_2_1  VGND VGND VPWR VPWR inv_2_2  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_c inv_2_2  VGND VGND VPWR VPWR inv_2_3  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_d inv_2_3  VGND VGND VPWR VPWR inv_2_4  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_e inv_2_4  VGND VGND VPWR VPWR inv_2_5  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_f inv_2_5  VGND VGND VPWR VPWR inv_2_6  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_g inv_2_6  VGND VGND VPWR VPWR inv_2_7  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_h inv_2_7  VGND VGND VPWR VPWR inv_2_8  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_i inv_2_8  VGND VGND VPWR VPWR inv_2_9  sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_j inv_2_9  VGND VGND VPWR VPWR inv_2_10 sky130_fd_sc_hd__inv_2
+Xsky130_fd_sc_hd__inv_2_k inv_2_10 VGND VGND VPWR VPWR inv_2_11 sky130_fd_sc_hd__inv_2
+
+
+* sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_a clk      VGND VGND VPWR VPWR inv_4_1  sky130_fd_sc_hd__inv_4 
+Xsky130_fd_sc_hd__inv_4_b inv_4_1  VGND VGND VPWR VPWR inv_4_2  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_c inv_4_2  VGND VGND VPWR VPWR inv_4_3  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_d inv_4_3  VGND VGND VPWR VPWR inv_4_4  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_e inv_4_4  VGND VGND VPWR VPWR inv_4_5  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_f inv_4_5  VGND VGND VPWR VPWR inv_4_6  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_g inv_4_6  VGND VGND VPWR VPWR inv_4_7  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_h inv_4_7  VGND VGND VPWR VPWR inv_4_8  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_i inv_4_8  VGND VGND VPWR VPWR inv_4_9  sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_j inv_4_9  VGND VGND VPWR VPWR inv_4_10 sky130_fd_sc_hd__inv_4
+Xsky130_fd_sc_hd__inv_4_k inv_4_10 VGND VGND VPWR VPWR inv_4_11 sky130_fd_sc_hd__inv_4
+
+* sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_a clk      VGND VGND VPWR VPWR inv_8_1  sky130_fd_sc_hd__inv_8 
+Xsky130_fd_sc_hd__inv_8_b inv_8_1  VGND VGND VPWR VPWR inv_8_2  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_c inv_8_2  VGND VGND VPWR VPWR inv_8_3  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_d inv_8_3  VGND VGND VPWR VPWR inv_8_4  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_e inv_8_4  VGND VGND VPWR VPWR inv_8_5  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_f inv_8_5  VGND VGND VPWR VPWR inv_8_6  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_g inv_8_6  VGND VGND VPWR VPWR inv_8_7  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_h inv_8_7  VGND VGND VPWR VPWR inv_8_8  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_i inv_8_8  VGND VGND VPWR VPWR inv_8_9  sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_j inv_8_9  VGND VGND VPWR VPWR inv_8_10 sky130_fd_sc_hd__inv_8
+Xsky130_fd_sc_hd__inv_8_k inv_8_10 VGND VGND VPWR VPWR inv_8_11 sky130_fd_sc_hd__inv_8
+
+* sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_a clk       VGND VGND VPWR VPWR inv_16_1  sky130_fd_sc_hd__inv_16 
+Xsky130_fd_sc_hd__inv_16_b inv_16_1  VGND VGND VPWR VPWR inv_16_2  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_c inv_16_2  VGND VGND VPWR VPWR inv_16_3  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_d inv_16_3  VGND VGND VPWR VPWR inv_16_4  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_e inv_16_4  VGND VGND VPWR VPWR inv_16_5  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_f inv_16_5  VGND VGND VPWR VPWR inv_16_6  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_g inv_16_6  VGND VGND VPWR VPWR inv_16_7  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_h inv_16_7  VGND VGND VPWR VPWR inv_16_8  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_i inv_16_8  VGND VGND VPWR VPWR inv_16_9  sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_j inv_16_9  VGND VGND VPWR VPWR inv_16_10 sky130_fd_sc_hd__inv_16
+Xsky130_fd_sc_hd__inv_16_k inv_16_10 VGND VGND VPWR VPWR inv_16_11 sky130_fd_sc_hd__inv_16
+
+* set gnd and power
+Vgnd VGND 0 0
+Vdd VPWR VGND 1.8
+
+* 25MHz clock
+vclk clk vgnd pulse(0 1.8 1n 10p 10p 20n 40n 100)
+
+* Load outputs
+R0  inv_2_11 vgnd 1Meg
+
+.tran 10p 5n
+
+.control
+   run
+   plot v(clk) v(inv_1_10) v(inv_2_10) v(inv_4_10) v(inv_8_10) v(inv_16_10)
+
+.endc
+
+.end
+

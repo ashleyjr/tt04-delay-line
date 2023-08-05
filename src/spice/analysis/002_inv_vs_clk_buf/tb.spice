@@ -1,0 +1,51 @@
+Simulation: 001_inv_prop_delay 
+
+
+.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' tt
+
+.include "/home/ashleyjr/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice"
+
+
+
+
+* sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_a clk      VGND VGND VPWR VPWR inv_1_1  sky130_fd_sc_hd__inv_1 
+Xsky130_fd_sc_hd__inv_1_b inv_1_1  VGND VGND VPWR VPWR inv_1_2  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_c inv_1_2  VGND VGND VPWR VPWR inv_1_3  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_d inv_1_3  VGND VGND VPWR VPWR inv_1_4  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_e inv_1_4  VGND VGND VPWR VPWR inv_1_5  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_f inv_1_5  VGND VGND VPWR VPWR inv_1_6  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_g inv_1_6  VGND VGND VPWR VPWR inv_1_7  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_h inv_1_7  VGND VGND VPWR VPWR inv_1_8  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_i inv_1_8  VGND VGND VPWR VPWR inv_1_9  sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_j inv_1_9  VGND VGND VPWR VPWR inv_1_10 sky130_fd_sc_hd__inv_1
+Xsky130_fd_sc_hd__inv_1_k inv_1_10 VGND VGND VPWR VPWR inv_1_11 sky130_fd_sc_hd__inv_1
+
+* sky130_fd_sc_hd__clkbuf_1
+Xsky130_fd_sc_hd__clkbuf_1_a clk      VGND VGND VPWR VPWR clkbuf_1_1  sky130_fd_sc_hd__clkbuf_1 
+Xsky130_fd_sc_hd__clkbuf_1_b clkbuf_1_1  VGND VGND VPWR VPWR clkbuf_1_2  sky130_fd_sc_hd__clkbuf_1
+Xsky130_fd_sc_hd__clkbuf_1_c clkbuf_1_2  VGND VGND VPWR VPWR clkbuf_1_3  sky130_fd_sc_hd__clkbuf_1
+Xsky130_fd_sc_hd__clkbuf_1_d clkbuf_1_3  VGND VGND VPWR VPWR clkbuf_1_4  sky130_fd_sc_hd__clkbuf_1
+Xsky130_fd_sc_hd__clkbuf_1_e clkbuf_1_4  VGND VGND VPWR VPWR clkbuf_1_5  sky130_fd_sc_hd__clkbuf_1
+Xsky130_fd_sc_hd__clkbuf_1_f clkbuf_1_5  VGND VGND VPWR VPWR clkbuf_1_6  sky130_fd_sc_hd__clkbuf_1
+
+* set gnd and power
+Vgnd VGND 0 0
+Vdd VPWR VGND 1.8
+
+* 25MHz clock
+vclk clk vgnd pulse(0 1.8 1n 10p 10p 20n 40n 100)
+
+* Load outputs
+R0  inv_2_11 vgnd 1Meg
+
+.tran 10p 5n
+
+.control
+   run
+   plot v(clk) v(inv_1_10) v(clkbuf_1_5)
+
+.endc
+
+.end
+
