@@ -10,8 +10,12 @@ module x_delay_line_cell(
    
 `ifdef SIMULATION
 
-   // 1ns
-   assign #1 o_dl = i_dl;
+   logic [1000-1:0]         dl;
+   logic [$clog2(1000)-1:0] sel;
+
+   assign #1ps dl = {dl[998:0],i_dl};
+
+   assign o_dl = dl[sel];
 
    always@(posedge i_clk or posedge i_rst) begin
       if(i_rst)   q <= 'd0;
