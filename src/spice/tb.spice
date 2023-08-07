@@ -1,6 +1,6 @@
 Simulation: tt_um_ashleyjr_delay_line
 
-.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' tt
+.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' ff
 
 .include "tt_um_ashleyjr_delay_line.spice"
 
@@ -73,8 +73,7 @@ R23  uio_oe_7 vgnd 1Meg
 
 .control
    run
-   plot v(clk) v(rst_n) v(ena) v(x0.u_delay_line.first_q)
-   plot v(x0.u_delay_line.dl_0)  v(x0.u_delay_line.dl_8) v(x0.u_delay_line.dl_16) v(x0.u_delay_line.dl_24)  v(x0.u_delay_line.dl_31) 
+   plot v(x0.u_delay_line.dl_0)  v(x0.u_delay_line.dl_8) v(x0.u_delay_line.dl_16) v(x0.u_delay_line.dl_24) v(x0.u_delay_line.dl_32) v(clk) v(x0.u_delay_line.first_q)
 .endc
 
 .end
