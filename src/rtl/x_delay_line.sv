@@ -1,11 +1,13 @@
 module x_delay_line(
    input    logic          i_clk,
-   input    logic          i_rst_n, 
-   input    logic          i_start,
-   output   logic [31:0]   o_data
+   input    logic          i_rst_n,  
+   output   logic [31:0]   o_data,
+   output   logic          o_valid 
 ); 
    (* keep = "true" *) logic           start_q;
-   (* keep = "true" *) logic           start_d; 
+   (* keep = "true" *) logic           start_d;
+   (* keep = "true" *) logic           valid_q;
+   (* keep = "true" *) logic           valid_d;
    (* keep = "true" *) logic           bulk_0; 
    (* keep = "true" *) logic           bulk_1;
    (* keep = "true" *) logic           bulk_2; 
@@ -98,6 +100,15 @@ module x_delay_line(
       if(!i_rst_n)   start_q <= 'd0;
       else           start_q <= start_d;
    end 
+  
+   assign valid_d = start_q;
+
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)   valid_q <= 'd0;
+      else           valid_q <= valid_d;
+   end
+
+   assign o_valid = valid_q;
   
    // Bulk section
    //

@@ -15,9 +15,8 @@ module tt_um_ashleyjr_delay_line(
    logic          tx_valid;
    logic          tx_accept; 
 
-   logic          start;
-   logic [31:0]   dl;
-   logic          rst;
+   logic          dl_valid; 
+   logic [31:0]   dl; 
 
    // Tie off unused outputs
    assign uo_out[7:1] = 7'h00;
@@ -59,15 +58,15 @@ module tt_um_ashleyjr_delay_line(
       .i_accept   (tx_accept  ),
       .o_data     (tx_data    ),
       // Delay line
-      .o_start    (start      ),
+      .i_dl_valid (dl_valid   ),
       .i_dl       (dl         )
    );
  
    x_delay_line u_delay_line(
       .i_clk      (clk        ),
-      .i_rst_n    (rst_n      ),
-      .i_start    (start      ),
-      .o_data     (dl         )
+      .i_rst_n    (rst_n      ), 
+      .o_data     (dl         ),
+      .o_valid    (dl_valid   )
    );
 
 endmodule

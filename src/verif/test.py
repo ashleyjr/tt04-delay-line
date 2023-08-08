@@ -50,20 +50,21 @@ async def unload_data(dut):
 async def dl(dut):
     await send(dut, 0x02)
 
-async def pvt(dut, delay_ps):
+async def pvt(dut, delay):
+    assert delay < 3
     for bulk in range(17):
-        for in in range(16):
-            exec(f"dut.u_dut.u_delay_line.u_bulk_{bulk}.u_inv_{inv}.sel.value = delay_ps")
-    for dl in range(33);
         for inv in range(16):
-            exec(f"dut.u_dut.u_delay_line.u_dl_{dl.u_inv_{inv}.sel.value = delay_ps")
+            exec(f"dut.u_dut.u_delay_line.u_bulk_{bulk}.u_inv_{inv}.sel.value = delay")
+    for dl in range(33):
+        for inv in range(16):
+            exec(f"dut.u_dut.u_delay_line.u_dl_{dl}.u_inv_{inv}.sel.value = delay")
 
 @cocotb.test()
 async def deadbeef(dut):
     dut._log.info("start")
 
     # Force delay model
-    await pvt(dut,40)
+    await pvt(dut,0)
 
     # Setup 50MHz clock
     clock = Clock(dut.clk, 20, units="ns")
@@ -96,7 +97,7 @@ async def capture(dut):
     dut._log.info("start")
 
     # Force delay model
-    await pvt(dut,40)
+    await pvt(dut,1)
 
     # Setup 50MHz clock
     clock = Clock(dut.clk, 20, units="ns")
@@ -122,5 +123,5 @@ async def capture(dut):
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0x0000007F
+    assert d == 0x000000FF
 
