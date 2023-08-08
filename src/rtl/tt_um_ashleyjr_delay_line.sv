@@ -24,16 +24,13 @@ module tt_um_ashleyjr_delay_line(
    assign uio_out     = 8'h00;
    assign uio_oe      = 8'h00;
 
-   // Reverse reset
-   assign rst = ~rst_n;
-
    // UART
    x_uart_rx #(
       .p_clk_hz   (50000000   ),
       .p_baud     (115200     )
    ) u_rx(
       .i_clk      (clk        ),
-      .i_rst      (rst        ),
+      .i_rst_n    (rst_n      ),
       .i_rx       (ui_in[0]   ),
       .o_valid    (rx_valid   ),    
       .o_data     (rx_data    )
@@ -44,7 +41,7 @@ module tt_um_ashleyjr_delay_line(
       .p_baud     (115200     )
    ) u_tx(
       .i_clk      (clk        ),
-      .i_rst      (rst        ),
+      .i_rst_n    (rst_n      ),
       .i_data     (tx_data    ),
       .o_tx       (uo_out[0]  ),
       .i_valid    (tx_valid   ),
@@ -53,7 +50,7 @@ module tt_um_ashleyjr_delay_line(
  
    x_driver u_driver(
       .i_clk      (clk        ),
-      .i_rst      (rst        ),
+      .i_rst_n    (rst_n      ),
       // Rx
       .i_valid    (rx_valid   ),
       .i_data     (rx_data    ),
@@ -68,7 +65,7 @@ module tt_um_ashleyjr_delay_line(
  
    x_delay_line u_delay_line(
       .i_clk      (clk        ),
-      .i_rst      (rst        ),
+      .i_rst_n    (rst_n      ),
       .i_start    (start      ),
       .o_data     (dl         )
    );

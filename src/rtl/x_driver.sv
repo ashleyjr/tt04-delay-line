@@ -1,6 +1,6 @@
 module x_driver(
    input    logic          i_clk,
-   input    logic          i_rst, 
+   input    logic          i_rst_n, 
    // RX
    input    logic          i_valid,
    input    logic [7:0]    i_data,
@@ -42,9 +42,9 @@ module x_driver(
   
    assign data_en = load_en | p3_capture | i_accept;
 
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)         data_q <= 'd0;
-      else if(data_en)  data_q <= data_d;
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)         data_q <= 'd0;
+      else if(data_en)     data_q <= data_d;
    end   
    
    // Hold valid
@@ -52,27 +52,27 @@ module x_driver(
 
    assign valid_en = unload_en | i_accept;
    
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)            valid_q <= 'd0;
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)         valid_q <= 'd0;
       else if(valid_en)    valid_q <= valid_d;
    end   
   
    // Delay for the capture
    assign p0_capture = dl_en;
 
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   p1_capture <= 'd0;
-      else        p1_capture <= p0_capture;
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)   p1_capture <= 'd0;
+      else           p1_capture <= p0_capture;
    end  
 
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   p2_capture <= 'd0;
-      else        p2_capture <= p1_capture;
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)   p2_capture <= 'd0;
+      else           p2_capture <= p1_capture;
    end  
 
-   always@(posedge i_clk or posedge i_rst) begin
-      if(i_rst)   p3_capture <= 'd0;
-      else        p3_capture <= p2_capture;
+   always@(posedge i_clk or negedge i_rst_n) begin
+      if(!i_rst_n)   p3_capture <= 'd0;
+      else           p3_capture <= p2_capture;
    end  
 
    // Decode 
