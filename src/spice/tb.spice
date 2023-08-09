@@ -68,12 +68,45 @@ R21  uio_oe_5 vgnd 1Meg
 R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
-
-.tran 100p 100n
+.tran 10p 40n
 
 .control
    run
-   plot v(x0.u_delay_line.dl_0)  v(x0.u_delay_line.dl_8) v(x0.u_delay_line.dl_16) v(x0.u_delay_line.dl_24) v(x0.u_delay_line.dl_32) v(clk) v(x0.u_delay_line.first_q)
+   wrdata u_dl.log 
+   + v(clk) 
+   + v(x0.u_delay_line.dl_0) 
+   + v(x0.u_delay_line.dl_1) 
+   + v(x0.u_delay_line.dl_2) 
+   + v(x0.u_delay_line.dl_3) 
+   + v(x0.u_delay_line.dl_4) 
+   + v(x0.u_delay_line.dl_5) 
+   + v(x0.u_delay_line.dl_6) 
+   + v(x0.u_delay_line.dl_7) 
+   + v(x0.u_delay_line.dl_8)
+   + v(x0.u_delay_line.dl_9) 
+   + v(x0.u_delay_line.dl_10) 
+   + v(x0.u_delay_line.dl_11) 
+   + v(x0.u_delay_line.dl_12) 
+   + v(x0.u_delay_line.dl_13) 
+   + v(x0.u_delay_line.dl_14) 
+   + v(x0.u_delay_line.dl_15) 
+   + v(x0.u_delay_line.dl_16) 
+   + v(x0.u_delay_line.dl_17)
+   + v(x0.u_delay_line.dl_18)
+   + v(x0.u_delay_line.dl_19)
+   + v(x0.u_delay_line.dl_20) 
+   + v(x0.u_delay_line.dl_21) 
+   + v(x0.u_delay_line.dl_22) 
+   + v(x0.u_delay_line.dl_23) 
+   + v(x0.u_delay_line.dl_24) 
+   + v(x0.u_delay_line.dl_25) 
+   + v(x0.u_delay_line.dl_26) 
+   + v(x0.u_delay_line.dl_27)
+   + v(x0.u_delay_line.dl_28)
+   + v(x0.u_delay_line.dl_29)
+   + v(x0.u_delay_line.dl_30)
+   + v(x0.u_delay_line.dl_31)
+   + v(x0.u_delay_line.dl_32)
 .endc
 
 .end
