@@ -1,6 +1,6 @@
 Simulation: tt_um_ashleyjr_delay_line
 
-.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' ff
+.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' tt
 
 .include "tt_um_ashleyjr_delay_line.spice"
 
@@ -68,12 +68,28 @@ R21  uio_oe_5 vgnd 1Meg
 R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
-.tran 10p 40n
+.tran 10p 100n
 
 .control
    run
-   wrdata u_dl.log 
+   wrdata delay_line.log 
    + v(clk) 
+   + v(x0.u_delay_line.bulk_0) 
+   + v(x0.u_delay_line.bulk_1) 
+   + v(x0.u_delay_line.bulk_2) 
+   + v(x0.u_delay_line.bulk_3) 
+   + v(x0.u_delay_line.bulk_4) 
+   + v(x0.u_delay_line.bulk_5) 
+   + v(x0.u_delay_line.bulk_6) 
+   + v(x0.u_delay_line.bulk_7) 
+   + v(x0.u_delay_line.bulk_8)
+   + v(x0.u_delay_line.bulk_9) 
+   + v(x0.u_delay_line.bulk_10) 
+   + v(x0.u_delay_line.bulk_11) 
+   + v(x0.u_delay_line.bulk_12) 
+   + v(x0.u_delay_line.bulk_13) 
+   + v(x0.u_delay_line.bulk_14) 
+   + v(x0.u_delay_line.bulk_15) 
    + v(x0.u_delay_line.dl_0) 
    + v(x0.u_delay_line.dl_1) 
    + v(x0.u_delay_line.dl_2) 
@@ -107,6 +123,38 @@ R23  uio_oe_7 vgnd 1Meg
    + v(x0.u_delay_line.dl_30)
    + v(x0.u_delay_line.dl_31)
    + v(x0.u_delay_line.dl_32)
+   + v(x0.u_delay_line.data_0) 
+   + v(x0.u_delay_line.data_1) 
+   + v(x0.u_delay_line.data_2) 
+   + v(x0.u_delay_line.data_3) 
+   + v(x0.u_delay_line.data_4) 
+   + v(x0.u_delay_line.data_5) 
+   + v(x0.u_delay_line.data_6) 
+   + v(x0.u_delay_line.data_7) 
+   + v(x0.u_delay_line.data_8)
+   + v(x0.u_delay_line.data_9) 
+   + v(x0.u_delay_line.data_10) 
+   + v(x0.u_delay_line.data_11) 
+   + v(x0.u_delay_line.data_12) 
+   + v(x0.u_delay_line.data_13) 
+   + v(x0.u_delay_line.data_14) 
+   + v(x0.u_delay_line.data_15) 
+   + v(x0.u_delay_line.data_16) 
+   + v(x0.u_delay_line.data_17)
+   + v(x0.u_delay_line.data_18)
+   + v(x0.u_delay_line.data_19)
+   + v(x0.u_delay_line.data_20) 
+   + v(x0.u_delay_line.data_21) 
+   + v(x0.u_delay_line.data_22) 
+   + v(x0.u_delay_line.data_23) 
+   + v(x0.u_delay_line.data_24) 
+   + v(x0.u_delay_line.data_25) 
+   + v(x0.u_delay_line.data_26) 
+   + v(x0.u_delay_line.data_27)
+   + v(x0.u_delay_line.data_28)
+   + v(x0.u_delay_line.data_29)
+   + v(x0.u_delay_line.data_30)
+   + v(x0.u_delay_line.data_31)
 .endc
 
 .end

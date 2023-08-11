@@ -165,7 +165,9 @@ module x_delay_line(
    (* keep = "true" *) x_delay_line_cell u_dl_29   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_29),.o_dl(dl_30),.o_data(data_29));
    (* keep = "true" *) x_delay_line_cell u_dl_30   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_30),.o_dl(dl_31),.o_data(data_30));
    (* keep = "true" *) x_delay_line_cell u_dl_31   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_31),.o_dl(dl_32),.o_data(data_31));
-   (* keep = "true" *) x_delay_line_cell u_dl_32   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_32),.o_dl(),     .o_data());    
+   
+   // Load last stages
+   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_0  (  .A(dl_32 ),  .Y( ));
   
    // Signal names
    // - Keep flat signal names for ngspice sims

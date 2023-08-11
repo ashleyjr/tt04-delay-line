@@ -55,7 +55,7 @@ async def pvt(dut, delay):
     for bulk in range(17):
         for inv in range(16):
             exec(f"dut.u_dut.u_delay_line.u_bulk_{bulk}.u_inv_{inv}.sel.value = delay")
-    for dl in range(33):
+    for dl in range(32):
         for inv in range(16):
             exec(f"dut.u_dut.u_delay_line.u_dl_{dl}.u_inv_{inv}.sel.value = delay")
 
