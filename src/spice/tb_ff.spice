@@ -1,0 +1,162 @@
+Simulation: tt_um_ashleyjr_delay_line
+
+.lib '/home/ashleyjr/open_pdks/sky130/sky130A/libs.tech/ngspice/sky130.lib.spice' ff
+
+.include "tt_um_ashleyjr_delay_line.spice"
+
+X0 VGND VPWR clk ena rst_n
++ ui_in_0 ui_in_1 ui_in_2 ui_in_3 ui_in_4 ui_in_5 ui_in_6 ui_in_7 
++ uio_in_0 uio_in_1 uio_in_2 uio_in_3 uio_in_4 uio_in_5 uio_in_6 uio_in_7 
++ uio_oe_0 uio_oe_1 uio_oe_2 uio_oe_3 uio_oe_4 uio_oe_5 uio_oe_6 uio_oe_7 
++ uio_out_0 uio_out_1 uio_out_2 uio_out_3 uio_out_4 uio_out_5 uio_out_6 uio_out_7 
++ uo_out_0 uo_out_1 uo_out_2 uo_out_3 uo_out_4 uo_out_5 uo_out_6 uo_out_7 
++ tt_um_ashleyjr_delay_line
+
+* set gnd and power
+Vgnd VGND 0 0
+Vdd VPWR VGND 1.8
+
+* 50MHz clock
+vclk clk vgnd pulse(0 1.8 20n 2n 2n 10n 20n 100)
+vena ena vgnd pwl(0n 0 15n 0 16n 1.8 1m 1.8)
+vrst_n rst_n vgnd pwl(0n 1.8 5n 1.8 6n 0 9n 0 10n 1.8)
+
+* Drive inputs to 0
+vui_in_0 ui_in_0 vgnd pwl(0n 0 1m 0)
+vui_in_1 ui_in_1 vgnd pwl(0n 0 1m 0)
+vui_in_2 ui_in_2 vgnd pwl(0n 0 1m 0)
+vui_in_3 ui_in_3 vgnd pwl(0n 0 1m 0)
+vui_in_4 ui_in_4 vgnd pwl(0n 0 1m 0)
+vui_in_5 ui_in_5 vgnd pwl(0n 0 1m 0)
+vui_in_6 ui_in_6 vgnd pwl(0n 0 1m 0)
+vui_in_7 ui_in_7 vgnd pwl(0n 0 1m 0)
+
+vuio_in_0 uio_in_0 vgnd pwl(0n 0 1m 0)
+vuio_in_1 uio_in_1 vgnd pwl(0n 0 1m 0)
+vuio_in_2 uio_in_2 vgnd pwl(0n 0 1m 0)
+vuio_in_3 uio_in_3 vgnd pwl(0n 0 1m 0)
+vuio_in_4 uio_in_4 vgnd pwl(0n 0 1m 0)
+vuio_in_5 uio_in_5 vgnd pwl(0n 0 1m 0)
+vuio_in_6 uio_in_6 vgnd pwl(0n 0 1m 0)
+vuio_in_7 uio_in_7 vgnd pwl(0n 0 1m 0)
+
+* Load outputs
+R0  uo_out_0 vgnd 1Meg
+R1  uo_out_1 vgnd 1Meg
+R2  uo_out_2 vgnd 1Meg
+R3  uo_out_3 vgnd 1Meg
+R4  uo_out_4 vgnd 1Meg
+R5  uo_out_5 vgnd 1Meg
+R6  uo_out_6 vgnd 1Meg
+R7  uo_out_7 vgnd 1Meg
+
+R8   uio_out_0 vgnd 1Meg
+R9   uio_out_1 vgnd 1Meg
+R10  uio_out_2 vgnd 1Meg
+R11  uio_out_3 vgnd 1Meg
+R12  uio_out_4 vgnd 1Meg
+R13  uio_out_5 vgnd 1Meg
+R14  uio_out_6 vgnd 1Meg
+R15  uio_out_7 vgnd 1Meg
+
+R16  uio_oe_0 vgnd 1Meg
+R17  uio_oe_1 vgnd 1Meg
+R18  uio_oe_2 vgnd 1Meg
+R19  uio_oe_3 vgnd 1Meg
+R20  uio_oe_4 vgnd 1Meg
+R21  uio_oe_5 vgnd 1Meg
+R22  uio_oe_6 vgnd 1Meg
+R23  uio_oe_7 vgnd 1Meg
+
+.tran 10p 200n
+
+.control
+   run
+   wrdata delay_line_ff.log 
+   + v(clk) 
+   + v(x0.u_delay_line.bulk_0) 
+   + v(x0.u_delay_line.bulk_1) 
+   + v(x0.u_delay_line.bulk_2) 
+   + v(x0.u_delay_line.bulk_3) 
+   + v(x0.u_delay_line.bulk_4) 
+   + v(x0.u_delay_line.bulk_5) 
+   + v(x0.u_delay_line.bulk_6) 
+   + v(x0.u_delay_line.bulk_7) 
+   + v(x0.u_delay_line.bulk_8)
+   + v(x0.u_delay_line.bulk_9) 
+   + v(x0.u_delay_line.bulk_10) 
+   + v(x0.u_delay_line.bulk_11) 
+   + v(x0.u_delay_line.bulk_12) 
+   + v(x0.u_delay_line.bulk_13) 
+   + v(x0.u_delay_line.bulk_14) 
+   + v(x0.u_delay_line.bulk_15) 
+   + v(x0.u_delay_line.dl_0) 
+   + v(x0.u_delay_line.dl_1) 
+   + v(x0.u_delay_line.dl_2) 
+   + v(x0.u_delay_line.dl_3) 
+   + v(x0.u_delay_line.dl_4) 
+   + v(x0.u_delay_line.dl_5) 
+   + v(x0.u_delay_line.dl_6) 
+   + v(x0.u_delay_line.dl_7) 
+   + v(x0.u_delay_line.dl_8)
+   + v(x0.u_delay_line.dl_9) 
+   + v(x0.u_delay_line.dl_10) 
+   + v(x0.u_delay_line.dl_11) 
+   + v(x0.u_delay_line.dl_12) 
+   + v(x0.u_delay_line.dl_13) 
+   + v(x0.u_delay_line.dl_14) 
+   + v(x0.u_delay_line.dl_15) 
+   + v(x0.u_delay_line.dl_16) 
+   + v(x0.u_delay_line.dl_17)
+   + v(x0.u_delay_line.dl_18)
+   + v(x0.u_delay_line.dl_19)
+   + v(x0.u_delay_line.dl_20) 
+   + v(x0.u_delay_line.dl_21) 
+   + v(x0.u_delay_line.dl_22) 
+   + v(x0.u_delay_line.dl_23) 
+   + v(x0.u_delay_line.dl_24) 
+   + v(x0.u_delay_line.dl_25) 
+   + v(x0.u_delay_line.dl_26) 
+   + v(x0.u_delay_line.dl_27)
+   + v(x0.u_delay_line.dl_28)
+   + v(x0.u_delay_line.dl_29)
+   + v(x0.u_delay_line.dl_30)
+   + v(x0.u_delay_line.dl_31)
+   + v(x0.u_delay_line.dl_32)
+   + v(x0.u_delay_line.data_0) 
+   + v(x0.u_delay_line.data_1) 
+   + v(x0.u_delay_line.data_2) 
+   + v(x0.u_delay_line.data_3) 
+   + v(x0.u_delay_line.data_4) 
+   + v(x0.u_delay_line.data_5) 
+   + v(x0.u_delay_line.data_6) 
+   + v(x0.u_delay_line.data_7) 
+   + v(x0.u_delay_line.data_8)
+   + v(x0.u_delay_line.data_9) 
+   + v(x0.u_delay_line.data_10) 
+   + v(x0.u_delay_line.data_11) 
+   + v(x0.u_delay_line.data_12) 
+   + v(x0.u_delay_line.data_13) 
+   + v(x0.u_delay_line.data_14) 
+   + v(x0.u_delay_line.data_15) 
+   + v(x0.u_delay_line.data_16) 
+   + v(x0.u_delay_line.data_17)
+   + v(x0.u_delay_line.data_18)
+   + v(x0.u_delay_line.data_19)
+   + v(x0.u_delay_line.data_20) 
+   + v(x0.u_delay_line.data_21) 
+   + v(x0.u_delay_line.data_22) 
+   + v(x0.u_delay_line.data_23) 
+   + v(x0.u_delay_line.data_24) 
+   + v(x0.u_delay_line.data_25) 
+   + v(x0.u_delay_line.data_26) 
+   + v(x0.u_delay_line.data_27)
+   + v(x0.u_delay_line.data_28)
+   + v(x0.u_delay_line.data_29)
+   + v(x0.u_delay_line.data_30)
+   + v(x0.u_delay_line.data_31)
+   quit
+.endc
+
+.end
+
