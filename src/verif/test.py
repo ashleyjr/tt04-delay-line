@@ -50,6 +50,10 @@ async def unload_data(dut):
 async def dl(dut):
     await send(dut, 0x02)
 
+async def short(dut):
+    await send(dut, 0x03)
+    return await get(dut)
+
 async def pvt(dut, delay):
     assert delay < 3
     for bulk in range(17):
@@ -63,7 +67,7 @@ async def pvt(dut, delay):
 async def deadbeef(dut):
     dut._log.info("start")
 
-    # Force delay model
+    # Force delay model to zero which speeds up the sim
     await pvt(dut,0)
 
     # Setup 50MHz clock
@@ -93,11 +97,46 @@ async def deadbeef(dut):
     assert d == 0xDEADBEEF
 
 @cocotb.test()
-async def capture(dut):
+async def tt_capture_short(dut):
     dut._log.info("start")
 
     # Force delay model
+    await pvt(dut,0)
+
+    # Setup 50MHz clock
+    clock = Clock(dut.clk, 20, units="ns")
+    cocotb.start_soon(clock.start())
+
+    # Reset design (active low)
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+
+    await ClockCycles(dut.clk, 10)
+
+    # Design has been selected
+    dut.ena.value = 1
+
+    # UART is idle
+    dut.ui_in.value = 0x01
+    await ClockCycles(dut.clk, 100)
+
+    # Fast samples
     await pvt(dut,1)
+    d = await short(dut)
+    assert d == 30
+
+    # Slow sample
+    await pvt(dut,2)
+    d = await short(dut)
+    assert d == 4
+
+@cocotb.test()
+async def tt_capture_long(dut):
+    dut._log.info("start")
+
+    # Force delay model off while
+    await pvt(dut,0)
 
     # Setup 50MHz clock
     clock = Clock(dut.clk, 20, units="ns")
@@ -118,10 +157,13 @@ async def capture(dut):
     await ClockCycles(dut.clk, 100)
 
     # Capture delay line
+    # - Spped up by turning on then off
+    await pvt(dut,2)
     await dl(dut)
+    await pvt(dut,0)
 
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0x000000FF
+    assert d == 0x0000007
 

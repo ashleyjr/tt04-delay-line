@@ -1,13 +1,16 @@
 `default_nettype none
 `timescale 1ns/1ps
 `define SIMULATION
+`define WAVES
 module tb ();
 
+   `ifdef WAVES
    initial begin
       $dumpfile ("tb.vcd");
       $dumpvars (0, tb);
       #1;
    end
+   `endif
    
    wire [7:0] uo_out;
    wire [7:0] ui_in;

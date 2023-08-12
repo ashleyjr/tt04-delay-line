@@ -8,13 +8,13 @@
       input    logic A,
       output   logic Y
    );      
-      logic [2:0]  d;
-      logic [1:0]  sel;
+      logic [2:0] d;
+      logic [1:0] sel;
 
-      assign       d[0] = 1'b0;
-      assign #50ps d[1] = A; 
-      assign #10ps d[2] = d[0]; 
-     
+      assign       d[0]  = 1'b0;
+      assign #27ps d[1]  = A;
+      assign #35ps d[2]  = d[1]; 
+      
       assign Y = ~d[sel];
    
    endmodule
@@ -84,7 +84,7 @@ module x_delay_line_cell(
       .CLK     (i_clk   ),
       .D       (o_dl    ),
       .RESET_B (i_rst_n ),
-      .Q       (o_data  )
+      .Q       (o_data  ) 
    );
 
 endmodule
