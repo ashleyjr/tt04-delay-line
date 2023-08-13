@@ -17,6 +17,8 @@ class Analysis:
         self.__extractClockCrossings()
         self.__extractTapCrossings()
         self.__sampleOutputData()
+        self.__extractEdges()
+
 
     def __extractLogfile(self):
         self.time = []
@@ -62,7 +64,6 @@ class Analysis:
                     if tap == TAPS-1:
                         cycle += 1
 
-
     def __sampleOutputData(self):
         self.sample = {}
         for i in self.clk_crossings:
@@ -74,6 +75,15 @@ class Analysis:
                 else:
                     s = f"0{s}"
             self.sample[str(self.time[i])] = s
+
+    def __extractEdges(self):
+        self.edges = {}
+        for s in self.sample:
+            taps = self.sample[s]
+            self.edges[s] = -1
+            for i in range(1,len(taps)):
+                if (taps[len(taps)-i] == "1") and (taps[len(taps)-i-1] == "0"):
+                    self.edges[s] = i
 
     def getTime(self):
         return self.time
@@ -90,6 +100,10 @@ class Analysis:
     def getSamples(self):
         return self.sample
 
+    def getEdges(self):
+        return self.edges
+
+
 class Plotter:
 
     def __init__(self, name, taps=False, trace=False):
@@ -103,7 +117,7 @@ class Plotter:
         assert self.taps == True
         for t in taps:
             plt.scatter(range(len(taps[t])),taps[t], s=1, label=t)
-        plt.grid()
+        plt.grid(which='minor')
         plt.legend()
         plt.title(self.name)
         plt.xlabel("Position")
@@ -118,11 +132,14 @@ class Plotter:
         plt.savefig(f"graph_{self.name}.png", dpi=200)
 
 def main():
-    u = Analysis("analysis/004_corners_sim/delay_line_tt.log")
+    tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
+    ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
-    samples = u.getSamples()
-    for s in samples:
-        print(f"{s}: {samples[s]}")
+    for test in [ff,tt]:
+        samples = test.getSamples()
+        edges = test.getEdges()
+        for s in samples:
+            print(f"{s}:\t{samples[s]} ({edges[s]})")
 
     # Plot the clock
     #p = Plotter("tt_clk", trace=True)
@@ -130,8 +147,9 @@ def main():
     #p.save()
 
     # Plot the clock
-    p = Plotter("tt_taps", taps=True)
-    p.plotTaps(u.getTapCrossings())
+    p = Plotter("taps", taps=True)
+    p.plotTaps(tt.getTapCrossings())
+    p.plotTaps(ff.getTapCrossings())
     p.save()
 
 

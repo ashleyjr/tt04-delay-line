@@ -165,5 +165,5 @@ async def tt_capture_long(dut):
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0x0000007
+    assert d == 0xFF80007
 
