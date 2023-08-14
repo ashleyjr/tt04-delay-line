@@ -15,9 +15,9 @@ class Analysis:
         f.close()
         self.__extractLogfile()
         self.__extractClockCrossings()
-        self.__extractTapCrossings()
-        self.__sampleOutputData()
-        self.__extractEdges()
+        #self.__extractTapCrossings()
+        #self.__sampleOutputData()
+        #self.__extractEdges()
 
 
     def __extractLogfile(self):
@@ -91,6 +91,9 @@ class Analysis:
     def getClock(self):
         return self.clk
 
+    def getTrace(self):
+        return self.dl
+
     def getTaps(self):
         return self.dl
 
@@ -132,14 +135,31 @@ class Plotter:
         plt.savefig(f"graph_{self.name}.png", dpi=200)
 
 def main():
+    ss = Analysis("analysis/004_corners_sim/delay_line_ss.log")
     tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
     ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
-    for test in [ff,tt]:
-        samples = test.getSamples()
-        edges = test.getEdges()
-        for s in samples:
-            print(f"{s}:\t{samples[s]} ({edges[s]})")
+
+    p = Plotter("ss_trace", trace=True)
+    taps = ss.getTrace()
+    p.plotTrace(ss.getTime(),ss.getClock())
+    p.plotTrace(ss.getTime(),taps[str(TAPS-DL)])
+    p.plotTrace(ss.getTime(),taps[str(TAPS-1)])
+    p.save()
+
+    p = Plotter("tt_trace", trace=True)
+    taps = tt.getTrace()
+    p.plotTrace(tt.getTime(),tt.getClock())
+    p.plotTrace(tt.getTime(),taps[str(TAPS-DL)])
+    p.plotTrace(tt.getTime(),taps[str(TAPS-1)])
+    p.save()
+
+
+    #for test in [ss,tt,ff]:
+    #    samples = test.getSamples()
+    #    edges = test.getEdges()
+    #    for s in samples:
+    #        print(f"{s}:\t{samples[s]} ({edges[s]})")
 
     # Plot the clock
     #p = Plotter("tt_clk", trace=True)
@@ -147,10 +167,11 @@ def main():
     #p.save()
 
     # Plot the clock
-    p = Plotter("taps", taps=True)
-    p.plotTaps(tt.getTapCrossings())
-    p.plotTaps(ff.getTapCrossings())
-    p.save()
+    #p = Plotter("taps", taps=True)
+    #p.plotTaps(ss.getTapCrossings())
+    #p.plotTaps(tt.getTapCrossings())
+    #p.plotTaps(ff.getTapCrossings())
+    #p.save()
 
 
 
