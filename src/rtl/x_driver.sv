@@ -14,7 +14,7 @@ module x_driver(
 );
    localparam p_dl_len   = 32;
    localparam p_dl2_len  = $clog2(p_dl_len); 
-   localparam p_samples  = 10;
+   localparam p_samples  = 8;
    localparam p_samples2 = $clog2(p_samples * 2);
    localparam p_data_len = p_samples * p_dl2_len; 
 
