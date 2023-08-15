@@ -94,7 +94,7 @@ module x_driver(
 
    // Edge detect
    assign data_shl = data_q << 1;
-   assign edge_oh  = data_shl & ~data_q; 
+   assign edge_oh  = (data_shl & ~data_q) >> 1; 
    assign edge_bin =  
       (edge_oh[30]) ? 5'h1F:
       (edge_oh[29]) ? 5'h1E:

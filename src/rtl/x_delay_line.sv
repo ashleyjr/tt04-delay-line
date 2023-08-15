@@ -24,6 +24,11 @@ module x_delay_line(
    (* keep = "true" *) logic           bulk_13;
    (* keep = "true" *) logic           bulk_14;
    (* keep = "true" *) logic           bulk_15;
+   (* keep = "true" *) logic           bulk_16;
+   (* keep = "true" *) logic           bulk_17;
+   (* keep = "true" *) logic           bulk_18;
+   (* keep = "true" *) logic           bulk_19;
+   (* keep = "true" *) logic           bulk_20;
    (* keep = "true" *) logic           dl_0; 
    (* keep = "true" *) logic           dl_1;
    (* keep = "true" *) logic           dl_2; 
@@ -112,9 +117,9 @@ module x_delay_line(
   
    // Bulk section
    //
-   // - At the SS corner 
-   // - Will bring the rising to start of the delay line
-
+   // - At the SS corner:  Will bring the rising to the start of the delay line
+   // - At the FF corner:  Will bring the rising to the end of the delay line
+   
    (* keep = "true" *) x_delay_line_bulk u_bulk_0  (.i_dl(start_q ), .o_inv(start_d),.o_dl(bulk_0  ));
    (* keep = "true" *) x_delay_line_bulk u_bulk_1  (.i_dl(bulk_0  ), .o_inv(),       .o_dl(bulk_1  ));
    (* keep = "true" *) x_delay_line_bulk u_bulk_2  (.i_dl(bulk_1  ), .o_inv(),       .o_dl(bulk_2  ));
@@ -131,7 +136,13 @@ module x_delay_line(
    (* keep = "true" *) x_delay_line_bulk u_bulk_13 (.i_dl(bulk_12 ), .o_inv(),       .o_dl(bulk_13 ));
    (* keep = "true" *) x_delay_line_bulk u_bulk_14 (.i_dl(bulk_13 ), .o_inv(),       .o_dl(bulk_14 ));
    (* keep = "true" *) x_delay_line_bulk u_bulk_15 (.i_dl(bulk_14 ), .o_inv(),       .o_dl(bulk_15 ));
-   (* keep = "true" *) x_delay_line_bulk u_bulk_16 (.i_dl(bulk_15 ), .o_inv(),       .o_dl(dl_0    ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_16 (.i_dl(bulk_15 ), .o_inv(),       .o_dl(bulk_16 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_17 (.i_dl(bulk_16 ), .o_inv(),       .o_dl(bulk_17 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_18 (.i_dl(bulk_17 ), .o_inv(),       .o_dl(bulk_18 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_19 (.i_dl(bulk_18 ), .o_inv(),       .o_dl(bulk_19 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_20 (.i_dl(bulk_19 ), .o_inv(),       .o_dl(bulk_20 ));
+   (* keep = "true" *) x_delay_line_bulk u_bulk_21 (.i_dl(bulk_20 ), .o_inv(),       .o_dl(dl_0    ));
+
 
    (* keep = "true" *) x_delay_line_cell u_dl_0    (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_0 ),.o_dl(dl_1 ),.o_data(data_0 ));
    (* keep = "true" *) x_delay_line_cell u_dl_1    (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_1 ),.o_dl(dl_2 ),.o_data(data_1 ));
@@ -166,7 +177,7 @@ module x_delay_line(
    (* keep = "true" *) x_delay_line_cell u_dl_30   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_30),.o_dl(dl_31),.o_data(data_30));
    (* keep = "true" *) x_delay_line_cell u_dl_31   (.i_clk(i_clk),.i_rst_n(i_rst_n),.i_dl(dl_31),.o_dl(dl_32),.o_data(data_31));
    
-   // Load last stages
+   // Load last stage
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_0  (  .A(dl_32 ),  .Y( ));
   
    // Signal names

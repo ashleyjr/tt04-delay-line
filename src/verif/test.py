@@ -8,6 +8,52 @@ BAUD = 115200
 DELAY = int(CLK / BAUD)
 DELAY_1_5 = int(DELAY * 1.5)
 
+
+# Delay line LUT
+# - Contains the delay need to position the delay
+# - All in fs
+dl_lut = [
+    56000,
+    54000,
+    52000,
+    50000,
+    48000,
+    46000,
+    44000,
+    42000,
+    41000,
+    40000,
+    39000,
+    37000,
+    36000,
+    35000,
+    34000,
+    33000,
+    32500,
+    32000,
+    31000,
+    30000,
+    29500,
+    29000,
+    28000,
+    27500,
+    27000,
+    26500,
+    26000,
+    25500,
+    25000,
+    24500,
+    24000,
+    23500
+]
+
+# Checker with debug output
+def check(expected, got):
+    if(expected != got):
+        dut._log.info(f"Expected: {expected}/0x{hex(expected)}")
+        dut._log.info(f"Got:      {got}/0x{hex(got)}")
+        assert(False)
+
 async def send(dut, d):
     dut.ui_in.value = 0x00
     await ClockCycles(dut.clk, DELAY)
@@ -55,8 +101,7 @@ async def short(dut):
     return await get(dut)
 
 async def pvt(dut, delay):
-    assert delay < 3
-    for bulk in range(17):
+    for bulk in range(22):
         for inv in range(16):
             exec(f"dut.u_dut.u_delay_line.u_bulk_{bulk}.u_inv_{inv}.sel.value = delay")
     for dl in range(32):
@@ -67,7 +112,7 @@ async def pvt(dut, delay):
 async def deadbeef(dut):
     dut._log.info("start")
 
-    # Force delay model to zero which speeds up the sim
+    # Turn off to speed up sim
     await pvt(dut,0)
 
     # Setup 50MHz clock
@@ -94,13 +139,13 @@ async def deadbeef(dut):
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0xDEADBEEF
+    check(0xDEADBEEF, d)
 
 @cocotb.test()
-async def tt_capture_short(dut):
+async def capture_short_sweep(dut):
     dut._log.info("start")
 
-    # Force delay model
+    # Turn off to speed up sim
     await pvt(dut,0)
 
     # Setup 50MHz clock
@@ -121,21 +166,18 @@ async def tt_capture_short(dut):
     dut.ui_in.value = 0x01
     await ClockCycles(dut.clk, 100)
 
-    # Fast samples
-    await pvt(dut,1)
-    d = await short(dut)
-    assert d == 30
-
-    # Slow sample
-    await pvt(dut,2)
-    d = await short(dut)
-    assert d == 4
+    # Sweep the entire delay line
+    for i in range(len(dl_lut)):
+        dut._log.info(f"Delay line pos: {i} ({dl_lut[i]}fs per inv)")
+        await pvt(dut,dl_lut[i])
+        d = await short(dut)
+        check(i,d)
 
 @cocotb.test()
-async def tt_capture_long(dut):
+async def capture_long(dut):
     dut._log.info("start")
 
-    # Force delay model off while
+    # Turn off to speed up sim
     await pvt(dut,0)
 
     # Setup 50MHz clock
@@ -158,12 +200,12 @@ async def tt_capture_long(dut):
 
     # Capture delay line
     # - Spped up by turning on then off
-    await pvt(dut,2)
+    await pvt(dut,54000)
     await dl(dut)
     await pvt(dut,0)
 
     # Unload
     d = await unload_data(dut)
 
-    assert d == 0xFF800007
+    check(0xff000001,d)
 

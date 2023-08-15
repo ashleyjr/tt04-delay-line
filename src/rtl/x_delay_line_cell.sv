@@ -2,21 +2,18 @@
 
    // Simulation
    // - Replace the cell with RTL sim models
-   // - Wen building will instance sky130 cell
+   // - When building will instance sky130 cell
+   //
+   // - Allow it to be tunred off to speed up sim
 
    module sky130_fd_sc_hd__inv_1(
       input    logic A,
       output   logic Y
-   );      
-      logic [2:0] d;
-      logic [1:0] sel;
+   );        
+      logic [15:0] sel; 
+         
+      assign #(sel) Y = (sel != 0) & ~A;  
 
-      assign       d[0]  = 1'b0;
-      assign #27ps d[1]  = A;
-      assign #35ps d[2]  = d[1]; 
-      
-      assign Y = ~d[sel];
-   
    endmodule
 
    module sky130_fd_sc_hd__dfrtp_1(

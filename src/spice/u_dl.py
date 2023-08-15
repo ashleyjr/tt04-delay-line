@@ -15,6 +15,9 @@ class Analysis:
         f.close()
         self.__extractLogfile()
         self.__extractClockCrossings()
+        self.__sampleTaps()
+        self.__sampleOutputData()
+
         #self.__extractTapCrossings()
         #self.__sampleOutputData()
         #self.__extractEdges()
@@ -64,6 +67,19 @@ class Analysis:
                     if tap == TAPS-1:
                         cycle += 1
 
+    def __sampleTaps(self):
+        self.sample_taps = {}
+        for i in self.clk_crossings:
+            s = ""
+            for d in range(TAPS):
+                v = self.dl[f"{d}"][i]
+                if(v >= THRESHOLD):
+                    s = f"1{s}"
+                else:
+                    s = f"0{s}"
+            self.sample_taps[str(self.time[i])] = s
+
+
     def __sampleOutputData(self):
         self.sample = {}
         for i in self.clk_crossings:
@@ -99,6 +115,9 @@ class Analysis:
 
     def getTapCrossings(self):
         return self.tap_crossings
+
+    def getSampleTaps(self):
+        return self.sample_taps
 
     def getSamples(self):
         return self.sample
@@ -140,26 +159,41 @@ def main():
     ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
 
-    p = Plotter("ss_trace", trace=True)
-    taps = ss.getTrace()
-    p.plotTrace(ss.getTime(),ss.getClock())
-    p.plotTrace(ss.getTime(),taps[str(TAPS-DL)])
-    p.plotTrace(ss.getTime(),taps[str(TAPS-1)])
-    p.save()
+    #p = Plotter("ss_trace", trace=True)
+    #taps = ss.getTrace()
+    #p.plotTrace(ss.getTime(),ss.getClock())
+    #p.plotTrace(ss.getTime(),taps[str(TAPS-DL)])
+    #p.plotTrace(ss.getTime(),taps[str(TAPS-1)])
+    #p.save()
 
-    p = Plotter("tt_trace", trace=True)
-    taps = tt.getTrace()
-    p.plotTrace(tt.getTime(),tt.getClock())
-    p.plotTrace(tt.getTime(),taps[str(TAPS-DL)])
-    p.plotTrace(tt.getTime(),taps[str(TAPS-1)])
-    p.save()
+    #p = Plotter("tt_trace", trace=True)
+    #taps = tt.getTrace()
+    #p.plotTrace(tt.getTime(),tt.getClock())
+    #p.plotTrace(tt.getTime(),taps[str(TAPS-DL)])
+    #p.plotTrace(tt.getTime(),taps[str(TAPS-1)])
+    #p.save()
 
 
-    #for test in [ss,tt,ff]:
-    #    samples = test.getSamples()
-    #    edges = test.getEdges()
-    #    for s in samples:
-    #        print(f"{s}:\t{samples[s]} ({edges[s]})")
+    def print_guide(name, l):
+        print(f"{name}")
+        s = ""
+        for i in range(l):
+            s = f"{str(hex(i % 16))[2]}{s}"
+        print(s)
+
+    for test in [ss,tt,ff]:
+        print_guide("D", 65)
+        samples = test.getSampleTaps()
+        for s in samples:
+            print(f"{s}:\t{samples[s]}")
+
+    print("Sampled Data:")
+    for test in [ss,tt,ff]:
+        print_guide("Q", 48)
+        samples = test.getSamples()
+        for s in samples:
+            print(f"{s}:\t{samples[s]}")
+
 
     # Plot the clock
     #p = Plotter("tt_clk", trace=True)

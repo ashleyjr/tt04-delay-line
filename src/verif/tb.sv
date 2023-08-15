@@ -1,7 +1,7 @@
 `default_nettype none
-`timescale 1ns/1ps
+`timescale 1fs/1fs
 `define SIMULATION
-`define WAVES
+//`define WAVES
 module tb ();
 
    `ifdef WAVES
