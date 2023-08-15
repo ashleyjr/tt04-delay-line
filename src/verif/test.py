@@ -48,10 +48,10 @@ dl_lut = [
 ]
 
 # Checker with debug output
-def check(expected, got):
+def check(dut, expected, got):
     if(expected != got):
-        dut._log.info(f"Expected: {expected}/0x{hex(expected)}")
-        dut._log.info(f"Got:      {got}/0x{hex(got)}")
+        dut._log.info(f"Expected: {expected}/{hex(expected)}")
+        dut._log.info(f"Got:      {got}/{hex(got)}")
         assert(False)
 
 async def send(dut, d):
@@ -79,18 +79,19 @@ async def get(dut):
 
 
 async def load_data(dut, d):
-    for i in range(8):
-        n = d >> (28 - (i*4))
+    for i in range(15):
+        n = d >> (56 - (i*4))
         n &= 0xF
         n <<= 4
         await send(dut, n)
 
 async def unload_data(dut):
     d = 0
-    for i in range(4):
+    for i in range(8):
         await send(dut, 0x01)
         d <<= 8
         d |= await get(dut)
+    d >>= 4
     return d
 
 async def dl(dut):
@@ -98,7 +99,18 @@ async def dl(dut):
 
 async def short(dut):
     await send(dut, 0x03)
-    return await get(dut)
+    await send(dut, 0x01)
+    d = await get(dut)
+    return d >> 3
+
+async def scope(dut):
+    await send(dut, 0x03)
+    d = await unload_data(dut)
+    samples = []
+    for i in range(12):
+        samples.append(0x1F & (d >> 55))
+        d <<= 5
+    return samples
 
 async def pvt(dut, delay):
     for bulk in range(22):
@@ -107,6 +119,11 @@ async def pvt(dut, delay):
     for dl in range(32):
         for inv in range(16):
             exec(f"dut.u_dut.u_delay_line.u_dl_{dl}.u_inv_{inv}.sel.value = delay")
+
+async def pvt_change(dut, time, delay0, delay1):
+    await pvt(dut, delay0)
+    await Timer(time, units="ns")
+    await pvt(dut, delay1)
 
 @cocotb.test()
 async def deadbeef(dut):
@@ -134,12 +151,12 @@ async def deadbeef(dut):
     await ClockCycles(dut.clk, 100)
 
     # Load
-    await load_data(dut, 0xDEADBEEF)
+    await load_data(dut, 0x123456789ABCEDF)
 
     # Unload
     d = await unload_data(dut)
 
-    check(0xDEADBEEF, d)
+    check(dut, 0x123456789ABCEDF, d)
 
 @cocotb.test()
 async def capture_short_sweep(dut):
@@ -171,7 +188,8 @@ async def capture_short_sweep(dut):
         dut._log.info(f"Delay line pos: {i} ({dl_lut[i]}fs per inv)")
         await pvt(dut,dl_lut[i])
         d = await short(dut)
-        check(i,d)
+        check(dut, i,d)
+
 
 @cocotb.test()
 async def capture_long(dut):
@@ -207,5 +225,40 @@ async def capture_long(dut):
     # Unload
     d = await unload_data(dut)
 
-    check(0xff000001,d)
+    check(dut, 0x0000000ff000001,d)
+
+@cocotb.test()
+async def capture_scope(dut):
+    dut._log.info("start")
+
+    # Turn off to speed up sim
+    await pvt(dut,0)
+
+    # Setup 50MHz clock
+    clock = Clock(dut.clk, 20, units="ns")
+    cocotb.start_soon(clock.start())
+
+    # Reset design (active low)
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+
+    await ClockCycles(dut.clk, 10)
+
+    # Design has been selected
+    dut.ena.value = 1
+
+    # UART is idle
+    dut.ui_in.value = 0x01
+    await ClockCycles(dut.clk, 100)
+
+    # Run the scope but change half way through
+    await cocotb.start(pvt_change(dut, 74200, dl_lut[7], dl_lut[8]))
+    s = await scope(dut)
+    dut._log.info(f"Scope: {s}")
+
+    assert(s == [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8] )
+
+
+
 
