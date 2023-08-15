@@ -79,19 +79,19 @@ async def get(dut):
 
 
 async def load_data(dut, d):
-    for i in range(15):
-        n = d >> (56 - (i*4))
+    for i in range(13):
+        n = d >> (48 - (i*4))
         n &= 0xF
         n <<= 4
         await send(dut, n)
 
 async def unload_data(dut):
     d = 0
-    for i in range(8):
+    for i in range(7):
         await send(dut, 0x01)
         d <<= 8
         d |= await get(dut)
-    d >>= 4
+    d >>= 6
     return d
 
 async def dl(dut):
@@ -107,8 +107,8 @@ async def scope(dut):
     await send(dut, 0x03)
     d = await unload_data(dut)
     samples = []
-    for i in range(12):
-        samples.append(0x1F & (d >> 55))
+    for i in range(10):
+        samples.append(0x1F & (d >> 45))
         d <<= 5
     return samples
 
@@ -151,12 +151,12 @@ async def deadbeef(dut):
     await ClockCycles(dut.clk, 100)
 
     # Load
-    await load_data(dut, 0x123456789ABCEDF)
+    await load_data(dut, 0x123456789ABCD)
 
     # Unload
     d = await unload_data(dut)
 
-    check(dut, 0x123456789ABCEDF, d)
+    check(dut, 0x123456789ABCD, d)
 
 @cocotb.test()
 async def capture_short_sweep(dut):
@@ -225,7 +225,7 @@ async def capture_long(dut):
     # Unload
     d = await unload_data(dut)
 
-    check(dut, 0x0000000ff000001,d)
+    check(dut, 0x00000ff000001,d)
 
 @cocotb.test()
 async def capture_scope(dut):
@@ -257,7 +257,7 @@ async def capture_scope(dut):
     s = await scope(dut)
     dut._log.info(f"Scope: {s}")
 
-    assert(s == [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8] )
+    assert(s == [7, 7, 7, 7, 7, 7, 7, 8, 8, 8] )
 
 
 

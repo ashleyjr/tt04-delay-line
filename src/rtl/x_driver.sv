@@ -14,7 +14,7 @@ module x_driver(
 );
    localparam p_dl_len   = 32;
    localparam p_dl2_len  = $clog2(p_dl_len); 
-   localparam p_samples  = 12;
+   localparam p_samples  = 10;
    localparam p_samples2 = $clog2(p_samples * 2);
    localparam p_data_len = p_samples * p_dl2_len; 
 
@@ -135,7 +135,7 @@ module x_driver(
    assign load_en   = (i_data[3:0] == 4'h0) & i_valid; // Shift in data
    assign unload_en = (i_data[3:0] == 4'h1) & i_valid; // Shift out data
    assign dl_en     = (i_data[3:0] == 4'h2) & i_valid; // Take a full 32-bit sample
-   assign edge_en   = (i_data[3:0] == 4'h3) & i_valid; // Take an edge detect 5-bit sample and send
+   assign edge_en   = (i_data[3:0] == 4'h3) & i_valid; // Take an edge detect 5-bit sample 
    
    // Drive Valid
    assign o_valid = valid_q;  
