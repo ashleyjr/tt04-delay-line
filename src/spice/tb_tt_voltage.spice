@@ -160,8 +160,7 @@ R23  uio_oe_7 vgnd 1Meg
    + v(x0.u_delay_line.data_29)
    + v(x0.u_delay_line.data_30)
    + v(x0.u_delay_line.data_31)
-   + v(Vdd)
-   quit
+   + v(VPWR) 
 .endc
 
 .end
