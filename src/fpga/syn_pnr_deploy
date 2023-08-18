@@ -4,8 +4,8 @@ echo "========================================================"
 echo "Running synth..."
 
 yosys \
-   -p "read -define FPGA" \
    -p "read -sv x_fpga.sv" \
+   -p "read -sv x_fpga_cells.sv" \
    -p "read -sv ../rtl/tt_um_ashleyjr_delay_line.sv" \
    -p "read -sv ../rtl/x_uart_rx.sv" \
    -p "read -sv ../rtl/x_uart_tx.sv" \
