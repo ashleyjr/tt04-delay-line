@@ -28,6 +28,7 @@ class Analysis:
         self.clk = []
         self.dl = {}
         self.data = {}
+        self.vdd = []
         for tap in range(TAPS):
             self.dl[f"{tap}"] = []
         for d in range(DATAS):
@@ -41,6 +42,7 @@ class Analysis:
                 self.dl[f"{i}"].append(float(d[3+(2*i)]))
             for i in range(DATAS):
                 self.data[f"{i}"].append(float(d[4+TAPS+(2*i)]))
+            self.vdd.append(float(d[-1]))
 
     def __extractClockCrossings(self):
         self.clk_crossings = []
@@ -104,6 +106,9 @@ class Analysis:
     def getTime(self):
         return self.time
 
+    def getVdd(self):
+        return self.vdd
+
     def getClock(self):
         return self.clk
 
@@ -158,6 +163,9 @@ def main():
     tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
     ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
+    v = Analysis("analysis/005_voltage_change/delay_line_tt_voltage.log")
+
+
 
     #p = Plotter("ss_trace", trace=True)
     #taps = ss.getTrace()
@@ -166,12 +174,13 @@ def main():
     #p.plotTrace(ss.getTime(),taps[str(TAPS-1)])
     #p.save()
 
-    #p = Plotter("tt_trace", trace=True)
-    #taps = tt.getTrace()
-    #p.plotTrace(tt.getTime(),tt.getClock())
-    #p.plotTrace(tt.getTime(),taps[str(TAPS-DL)])
-    #p.plotTrace(tt.getTime(),taps[str(TAPS-1)])
-    #p.save()
+    p = Plotter("v_trace", trace=True)
+    taps = v.getTrace()
+    #p.plotTrace(v.getTime(),v.getClock())
+    #p.plotTrace(v.getTime(),taps[str(TAPS-DL)])
+    #p.plotTrace(v.getTime(),taps[str(TAPS-1)])
+    p.plotTrace(v.getTime(),v.getVdd())
+    p.save()
 
 
     def print_guide(name, l):
@@ -181,14 +190,14 @@ def main():
             s = f"{str(hex(i % 16))[2]}{s}"
         print(s)
 
-    for test in [ss,tt,ff]:
+    for test in [v]:
         print_guide("D", 65)
         samples = test.getSampleTaps()
         for s in samples:
             print(f"{s}:\t{samples[s]}")
 
     print("Sampled Data:")
-    for test in [ss,tt,ff]:
+    for test in [v]:
         print_guide("Q", 48)
         samples = test.getSamples()
         for s in samples:

@@ -14,7 +14,15 @@ X0 VGND VPWR clk ena rst_n
 
 * set gnd and power
 Vgnd VGND 0 0
-Vdd VPWR VGND pwl(0n 1.75 60n 1.77 100n 1.79 140 1.81)
+Vdd VPWR VGND pwl(
++0n 1.75 
++59n 1.75
++60n 1.77
++99n 1.77
++100n 1.79 
++139 1.79
++140n 1.81
++)
 
 * 50MHz clock
 vclk clk vgnd pulse(0 1.8 20n 2n 2n 10n 20n 100)
@@ -68,7 +76,7 @@ R21  uio_oe_5 vgnd 1Meg
 R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
-.tran 10p 200n 
+.tran 1n 200n 
 
 .control
    run
