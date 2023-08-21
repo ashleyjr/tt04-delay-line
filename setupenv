@@ -3,3 +3,4 @@ export PDK_ROOT=~/open_pdks/sky130/
 export PDK=sky130A
 export STD_CELL_LIBRARY=sky130_fd_pr
 cp -f $PDK_ROOT/$PDK/libs.tech/magic/$PDK.magicrc $HOME/.magicrc
+export PATH="~/oss-cad-suite/oss-cad-suite/bin:$PATH"
