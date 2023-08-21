@@ -19,19 +19,22 @@ dl_lut = [
     50000,
     48000,
     46000,
+    45000,
     44000,
-    42000,
+    43000,
     41000,
     40000,
     39000,
+    38000,
     37000,
     36000,
     35000,
-    34000,
+    34500,
+    33500,
     33000,
-    32500,
     32000,
     31000,
+    30500,
     30000,
     29500,
     29000,
@@ -40,11 +43,8 @@ dl_lut = [
     27000,
     26500,
     26000,
-    25500,
-    25000,
-    24500,
-    24000,
-    23500
+    25800,
+    25300
 ]
 
 # Checker with debug output
@@ -116,7 +116,7 @@ async def pvt(dut, delay):
         for inv in range(16):
             exec(f"dut.u_dut.u_delay_line.u_bulk_{bulk}.u_inv_{inv}.sel.value = delay")
     for dl in range(32):
-        for inv in range(16):
+        for inv in range(14):
             exec(f"dut.u_dut.u_delay_line.u_dl_{dl}.u_inv_{inv}.sel.value = delay")
 
 async def pvt_change(dut, time, delay0, delay1):
@@ -224,7 +224,7 @@ async def capture_long(dut):
     # Unload
     d = await unload_data(dut)
 
-    check(dut, 0x00000ff000001,d)
+    check(dut, 0x00000f8000001,d)
 
 @cocotb.test()
 async def capture_scope(dut):

@@ -25,8 +25,6 @@ module x_delay_line_cell(
    (* keep = "true" *) logic dl_10;
    (* keep = "true" *) logic dl_11;
    (* keep = "true" *) logic dl_12;
-   (* keep = "true" *) logic dl_13;
-   (* keep = "true" *) logic dl_14;
 
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_0  (  .A(i_dl ),  .Y(dl_0 ));
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_1  (  .A(dl_0 ),  .Y(dl_1 ));
@@ -41,9 +39,7 @@ module x_delay_line_cell(
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_10 (  .A(dl_9 ),  .Y(dl_10));
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_11 (  .A(dl_10),  .Y(dl_11));
    (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_12 (  .A(dl_11),  .Y(dl_12));
-   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_13 (  .A(dl_12),  .Y(dl_13));
-   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_14 (  .A(dl_13),  .Y(dl_14));
-   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_15 (  .A(dl_14),  .Y(o_dl ));  
+   (* keep = "true" *) sky130_fd_sc_hd__inv_1 u_inv_13 (  .A(dl_12),  .Y(o_dl));
   
    (* keep = "true" *) sky130_fd_sc_hd__dfrtp_1 u_ff (       
       .CLK     (i_clk   ),
