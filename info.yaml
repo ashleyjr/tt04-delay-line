@@ -34,16 +34,22 @@ documentation:
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
     
-      - Delay lines change time delay based on different variables such as process, voltage and temperature.
+      - A delay line output changes based on time delay of different variables such as process, voltage and temperature.
       
-      - There are may different delay line architectures; see https://springerplus.springeropen.com/articles/10.1186/s40064-016-2090-z. 
+      - There are may different delay line architectures.
+
+         - https://springerplus.springeropen.com/articles/10.1186/s40064-016-2090-z. 
       
       - This implementation is a simple tapped delay line.
       
       - The continually changing data races through a chain of inverters.
       
       - The chain is sampled a different stages to become a digital signal.
-     
+
+      - An edge detection circuit is used find the rising which is then converted in a binary value.
+
+      - A bank of flops is used to sample 8 sequential rising edge values.
+
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
       
