@@ -18,9 +18,9 @@ class Analysis:
         self.__sampleTaps()
         self.__sampleOutputData()
 
-        #self.__extractTapCrossings()
-        #self.__sampleOutputData()
-        #self.__extractEdges()
+        self.__extractTapCrossings()
+        self.__sampleOutputData()
+        self.__extractEdges()
 
 
     def __extractLogfile(self):
@@ -159,11 +159,11 @@ class Plotter:
         plt.savefig(f"graph_{self.name}.png", dpi=200)
 
 def main():
-    ss = Analysis("analysis/004_corners_sim/delay_line_ss.log")
-    tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
-    ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
+    #ss = Analysis("analysis/004_corners_sim/delay_line_ss.log")
+    #tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
+    #ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
-    v = Analysis("analysis/005_voltage_change/delay_line_tt_voltage.log")
+    v = Analysis("analysis/006_voltage_change_2/delay_line_tt_voltage.log")
 
 
 
@@ -210,11 +210,9 @@ def main():
     #p.save()
 
     # Plot the clock
-    #p = Plotter("taps", taps=True)
-    #p.plotTaps(ss.getTapCrossings())
-    #p.plotTaps(tt.getTapCrossings())
-    #p.plotTaps(ff.getTapCrossings())
-    #p.save()
+    p = Plotter("taps", taps=True)
+    p.plotTaps(v.getTapCrossings())
+    p.save()
 
 
 
