@@ -8,7 +8,7 @@ This project is part of [TinyTapeout4](https://github.com/TinyTapeout/tt04-submi
 
 ## info.yaml
 
-https://github.com/ashleyjr/tt04-delay-line/blob/main/info.yaml
+https://github.com/ashleyjr/tt04-delay-line/blob/6519acb5b62bb44f2a40a852c76d2c315588bd75/info.yaml#L34-L108
 
 ## Expected perfomrance 
 
