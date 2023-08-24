@@ -26,7 +26,7 @@ This project is part of [TinyTapeout4](https://github.com/TinyTapeout/tt04-submi
 
 ## Test
 
-- https://github.com/ashleyjr/tt04-delay-line/src/test/silicon_test.py
+- https://github.com/ashleyjr/tt04-delay-line/blob/main/src/test/silicon_test.py
 
    - This python script uses pyserial to run a set of tests on the design
 
