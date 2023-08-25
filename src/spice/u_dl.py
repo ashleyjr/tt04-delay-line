@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-BULK=16
+BULK=21
 DL=33
 DATAS=32
 TAPS=BULK+DL # bulk + dl
@@ -41,7 +41,7 @@ class Analysis:
             for i in range(TAPS):
                 self.dl[f"{i}"].append(float(d[3+(2*i)]))
             for i in range(DATAS):
-                self.data[f"{i}"].append(float(d[4+TAPS+(2*i)]))
+                self.data[f"{i}"].append(float(d[3+(2*TAPS)+(2*i)]))
             self.vdd.append(float(d[-1]))
 
     def __extractClockCrossings(self):
@@ -118,6 +118,9 @@ class Analysis:
     def getTaps(self):
         return self.dl
 
+    def getData(self):
+        return self.data
+
     def getTapCrossings(self):
         return self.tap_crossings
 
@@ -139,23 +142,43 @@ class Plotter:
         self.trace = trace
         assert self.taps ^ self.trace
         plt.figure()
+        self.times = []
+        self.traces = []
+        self.labels = []
 
-    def plotTaps(self, taps):
+    def plotTaps(self, taps, labels):
         assert self.taps == True
-        for t in taps:
-            plt.scatter(range(len(taps[t])),taps[t], s=1, label=t)
-        plt.grid(which='minor')
+        for i,t in enumerate(taps):
+            plt.scatter(range(len(taps[t])),taps[t], s=1, label=labels[i])
+        plt.grid(True, which='major')
+        plt.grid(True, which='minor')
         plt.legend()
         plt.title(self.name)
         plt.xlabel("Position")
         plt.ylabel("Time (ns)")
 
+    def plotRef(self, x0, y0, x1, y1):
+        plt.plot([x0,x1],[y0,y1],linewidth=1)
+        #plt.xlim([x0,x1])
 
-    def plotTrace(self, time, voltage):
+    def plotTrace(self, time, voltage, label=""):
         assert self.trace == True
-        plt.plot(time,voltage)
+        self.times.append(time)
+        self.traces.append(voltage)
+        self.labels.append(label)
 
     def save(self):
+        #plt.subplots(len(self.traces),1)
+        plt.rcParams.update({'font.size': 4})
+        i = 1
+        for label,time,trace in zip(self.labels,self.times,self.traces):
+            plt.subplot(len(self.traces),1,i)
+            plt.plot(time,trace)
+            plt.gca().get_xaxis().set_visible(False)
+            plt.ylabel(f"{label} (V)")
+            i += 1
+        plt.gca().get_xaxis().set_visible(True)
+        plt.xlabel('Time (s)')
         plt.savefig(f"graph_{self.name}.png", dpi=200)
 
 def main():
@@ -163,25 +186,7 @@ def main():
     #tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
     #ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
-    v = Analysis("analysis/006_voltage_change_2/delay_line_tt_voltage.log")
-
-
-
-    #p = Plotter("ss_trace", trace=True)
-    #taps = ss.getTrace()
-    #p.plotTrace(ss.getTime(),ss.getClock())
-    #p.plotTrace(ss.getTime(),taps[str(TAPS-DL)])
-    #p.plotTrace(ss.getTime(),taps[str(TAPS-1)])
-    #p.save()
-
-    p = Plotter("v_trace", trace=True)
-    taps = v.getTrace()
-    #p.plotTrace(v.getTime(),v.getClock())
-    #p.plotTrace(v.getTime(),taps[str(TAPS-DL)])
-    #p.plotTrace(v.getTime(),taps[str(TAPS-1)])
-    p.plotTrace(v.getTime(),v.getVdd())
-    p.save()
-
+    v = Analysis("analysis/007_voltage_change_3/delay_line_tt_voltage.log")
 
     def print_guide(name, l):
         print(f"{name}")
@@ -191,7 +196,7 @@ def main():
         print(s)
 
     for test in [v]:
-        print_guide("D", 65)
+        print_guide("D", 70)
         samples = test.getSampleTaps()
         for s in samples:
             print(f"{s}:\t{samples[s]}")
@@ -204,18 +209,30 @@ def main():
             print(f"{s}:\t{samples[s]}")
 
 
-    # Plot the clock
-    #p = Plotter("tt_clk", trace=True)
-    #p.plotTrace(u.getTime(),u.getClock())
-    #p.save()
-
-    # Plot the clock
-    p = Plotter("taps", taps=True)
-    p.plotTaps(v.getTapCrossings())
+    p = Plotter("q_trace", trace=True)
+    taps = v.getTrace()
+    p.plotTrace(v.getTime(),v.getVdd(),"VDD")
+    p.plotTrace(v.getTime(),v.getClock(), "CLK")
+    for i in range(8,18):
+        p.plotTrace(v.getTime(),v.getData()[f"{i}"],f"Q[{i}]")
     p.save()
 
+    p = Plotter("d_trace", trace=True)
+    taps = v.getTrace()
+    p.plotTrace(v.getTime(),v.getVdd(),"VDD")
+    p.plotTrace(v.getTime(),v.getClock(), "CLK")
+    for i in range(25,TAPS-13):
+        p.plotTrace(v.getTime(),v.getTaps()[f"{i}"],f"Q[{i}]")
+    p.save()
 
-
+    # Plot the delays
+    p = Plotter("taps", taps=True)
+    p.plotTaps(v.getTapCrossings(), ["750mV","770mV","790mV","810mV","830mV", "850mV"])
+    p.plotRef(0,2e-8,50,2e-8)
+    p.plotRef(35,0,35,3e-8)
+    p.plotRef(36,0,36,3e-8)
+    p.plotRef(37,0,37,3e-8)
+    p.save()
 
 if "__main__" == __name__:
     main()
