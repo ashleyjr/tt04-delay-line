@@ -80,7 +80,7 @@ R21  uio_oe_5 vgnd 1Meg
 R22  uio_oe_6 vgnd 1Meg
 R23  uio_oe_7 vgnd 1Meg
 
-.tran 10p 240n 
+.tran 10p 250n 
 
 .control
    run
