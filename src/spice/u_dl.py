@@ -186,7 +186,7 @@ def main():
     #tt = Analysis("analysis/004_corners_sim/delay_line_tt.log")
     #ff = Analysis("analysis/004_corners_sim/delay_line_ff.log")
 
-    v = Analysis("analysis/007_voltage_change_3/delay_line_tt_voltage.log")
+    v = Analysis("analysis/008_voltage_change_4/delay_line_tt_voltage.log")
 
     def print_guide(name, l):
         print(f"{name}")
