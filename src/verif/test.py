@@ -4,7 +4,7 @@ from cocotb.triggers import RisingEdge, FallingEdge, Timer, ClockCycles
 from cocotb.handle import Force
 
 CLK = 50000000
-BAUD = 115200
+BAUD = 9600
 DELAY = int(CLK / BAUD)
 DELAY_1_5 = int(DELAY * 1.5)
 

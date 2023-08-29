@@ -36,7 +36,7 @@ This project is part of [TinyTapeout4](https://github.com/TinyTapeout/tt04-submi
 
    - The UART is the only interface to the design
    
-      - 115200 baud
+      - 9600 baud
       
       - Least significant bit first
       

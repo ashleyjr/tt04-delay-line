@@ -9,11 +9,10 @@ KEYWORD="Lattice FTUSB Interface Cable"
 
 class Uart:
     def send(self, d):
-        self.ser.write(d)
+        self.ser.write(d.to_bytes(1, byteorder='big'))
 
     def get(self):
-        d = self.ser.read(1)
-        print(d)
+        d = int.from_bytes(self.ser.read(1), byteorder='big')
         return int(d)
 
     def create(self,port,baud):
@@ -66,10 +65,13 @@ class Test(Uart):
 def main():
     u = Test()
     p = u.search()
-    u.create(p,115200)
-    u.load_data(0xDEADBEEF)
-    d = u.unload_data()
-    print(d)
+    u.create(p,9600)
+    #u.send(ord('A'))
+    #u.get()
+    for i in range(10):
+        u.load_data(0xBEDEADBEEF)
+        d = u.unload_data()
+        print(hex(d))
     u.destory()
     print("PASS")
 

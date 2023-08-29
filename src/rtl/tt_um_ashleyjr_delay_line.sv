@@ -26,7 +26,7 @@ module tt_um_ashleyjr_delay_line(
    // UART
    x_uart_rx #(
       .p_clk_hz   (50000000   ),
-      .p_baud     (115200     )
+      .p_baud     (9600       )
    ) u_rx(
       .i_clk      (clk        ),
       .i_rst_n    (rst_n      ),
@@ -37,7 +37,7 @@ module tt_um_ashleyjr_delay_line(
 
    x_uart_tx #(
       .p_clk_hz   (50000000   ),
-      .p_baud     (115200     )
+      .p_baud     (9600       )
    ) u_tx(
       .i_clk      (clk        ),
       .i_rst_n    (rst_n      ),
