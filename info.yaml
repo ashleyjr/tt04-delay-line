@@ -63,7 +63,7 @@ documentation:
 
          - The UART is the only interface to the design
 
-            - 115200 baud
+            - 9600 baud
             
             - Least significant bit first
             
