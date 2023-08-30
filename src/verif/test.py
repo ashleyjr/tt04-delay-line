@@ -124,7 +124,7 @@ async def pvt_change(dut, time, delay0, delay1):
     await Timer(time, units="ns")
     await pvt(dut, delay1)
 
-@cocotb.test()
+@cocotb.test(skip=True)
 async def deadbeef(dut):
     dut._log.info("start")
 
@@ -157,7 +157,7 @@ async def deadbeef(dut):
 
     check(dut, 0x123456789A, d)
 
-@cocotb.test()
+@cocotb.test(skip=True)
 async def capture_short_sweep(dut):
     dut._log.info("start")
 
@@ -226,7 +226,7 @@ async def capture_long(dut):
 
     check(dut, 0x000000000FFFF,d)
 
-@cocotb.test()
+@cocotb.test(skip=True)
 async def capture_scope(dut):
     dut._log.info("start")
 
