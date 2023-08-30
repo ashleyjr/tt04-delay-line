@@ -159,7 +159,11 @@ class Plotter:
 
     def plotRef(self, x0, y0, x1, y1):
         plt.plot([x0,x1],[y0,y1],linewidth=1)
-        #plt.xlim([x0,x1])
+        if x0 == x1:
+            plt.ylim([y0,y1])
+        else:
+            plt.xlim([x0,x1])
+
 
     def plotTrace(self, time, voltage, label=""):
         assert self.trace == True
@@ -178,7 +182,6 @@ class Plotter:
             plt.ylabel(f"{label} (V)")
             i += 1
         plt.gca().get_xaxis().set_visible(True)
-        plt.xlabel('Time (s)')
         plt.savefig(f"graph_{self.name}.png", dpi=200)
 
 def main():
@@ -213,7 +216,7 @@ def main():
     taps = v.getTrace()
     p.plotTrace(v.getTime(),v.getVdd(),"VDD")
     p.plotTrace(v.getTime(),v.getClock(), "CLK")
-    for i in range(8,18):
+    for i in range(12,22):
         p.plotTrace(v.getTime(),v.getData()[f"{i}"],f"Q[{i}]")
     p.save()
 
@@ -221,7 +224,7 @@ def main():
     taps = v.getTrace()
     p.plotTrace(v.getTime(),v.getVdd(),"VDD")
     p.plotTrace(v.getTime(),v.getClock(), "CLK")
-    for i in range(25,TAPS-13):
+    for i in range(25,35):
         p.plotTrace(v.getTime(),v.getTaps()[f"{i}"],f"Q[{i}]")
     p.save()
 
@@ -229,9 +232,10 @@ def main():
     p = Plotter("taps", taps=True)
     p.plotTaps(v.getTapCrossings(), ["750mV","770mV","790mV","810mV","830mV", "850mV"])
     p.plotRef(0,2e-8,50,2e-8)
-    p.plotRef(35,0,35,3e-8)
-    p.plotRef(36,0,36,3e-8)
-    p.plotRef(37,0,37,3e-8)
+    p.plotRef(21,0,21,3e-8)
+    p.plotRef(38,0,38,3e-8)
+    p.plotRef(39,0,39,3e-8)
+    p.plotRef(40,0,40,3e-8)
     p.save()
 
 if "__main__" == __name__:
